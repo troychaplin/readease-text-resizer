@@ -2,17 +2,18 @@
 
 ## Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 20 (see `.nvmrc`)
 - WordPress 6.4+ with a block theme (e.g., Twenty Twenty-Five)
-- Local development environment (LocalWP, wp-env, DDEV, etc.)
+- Local development environment (wp-env, LocalWP, DDEV, etc.)
 
 ## Setup
 
-### 1. Clone/Install the Plugin
+### 1. Install Dependencies
 
 ```bash
 cd wp-content/plugins/flextype
 npm install
+composer install
 ```
 
 ### 2. Development Commands
@@ -24,48 +25,61 @@ npm start
 # Build for production
 npm run build
 
-# Lint JavaScript
-npm run lint:js
+# Lint all (JS, CSS, PHP)
+npm run lint
 
-# Lint CSS
-npm run lint:css
-
-# Format code
+# Format all
 npm run format
+
+# Individual linters
+npm run lint:js
+npm run lint:css
+npm run lint:php
+
+# Individual formatters
+npm run format:js
+npm run format:css
+npm run format:php
 ```
 
 ## Project Structure
 
 ```
 flextype/
-├── flextype.php              # Plugin bootstrap
-├── package.json              # Dependencies and scripts
-├── readme.txt                # WP.org readme
-├── REQUIREMENTS.md           # Project requirements
-├── docs/                     # Documentation
-│   ├── ARCHITECTURE.md       # Technical architecture
-│   ├── DEVELOPMENT.md        # This file
-│   └── TESTING.md            # Testing guide
-├── src/                      # Source files
-│   ├── block.json            # Block metadata
-│   ├── index.js              # Block registration
-│   ├── edit.js               # Editor component
-│   ├── save.js               # Save component
-│   ├── view.js               # Frontend script
-│   ├── editor.scss           # Editor styles
-│   └── style.scss            # Frontend styles
-├── build/                    # Compiled assets (gitignored)
-└── includes/
-    └── render.php            # Server-side render
+├── flextype.php                    # Plugin bootstrap
+├── package.json                    # Node dependencies and scripts
+├── composer.json                   # PHP dependencies
+├── src/
+│   └── flextype/                   # Block source files
+│       ├── block.json              # Block metadata
+│       ├── index.js                # Block registration
+│       ├── edit.js                 # Editor component
+│       ├── view.js                 # Frontend script
+│       ├── render.php              # Server-side render
+│       ├── editor.scss             # Editor styles
+│       └── style.scss              # Frontend styles
+├── build/                          # Compiled assets (gitignored)
+└── docs/                           # Documentation
 ```
 
-## Development Workflow
+## Build Output
 
-### Creating the Block
+The `@wordpress/scripts` build generates:
 
-The block uses `@wordpress/scripts` for build tooling. Key files:
+| File | Purpose | Loaded |
+|------|---------|--------|
+| `build/flextype/index.js` | Block registration + editor | Editor only |
+| `build/flextype/index.css` | Editor styles | Editor only |
+| `build/flextype/style-index.css` | Frontend + editor styles | Both |
+| `build/flextype/view.js` | Frontend interactivity | Frontend only |
+| `build/flextype/render.php` | Server-side render | Frontend only |
 
-**block.json** - Block metadata and configuration:
+## Key Files
+
+### block.json
+
+Block metadata, attributes, and asset references:
+
 ```json
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
@@ -73,37 +87,24 @@ The block uses `@wordpress/scripts` for build tooling. Key files:
   "name": "flextype/text-resizer",
   "title": "FlexType Text Resizer",
   "category": "theme",
-  "icon": "editor-textcolor",
-  "description": "Let visitors resize text for better readability.",
-  "supports": {
-    "align": ["left", "center", "right"],
-    "color": {
-      "background": true,
-      "text": true
-    },
-    "spacing": {
-      "margin": true,
-      "padding": true
-    },
-    "typography": {
-      "fontSize": true
-    }
-  },
   "attributes": { ... },
-  "textdomain": "flextype",
+  "supports": { ... },
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "viewScript": "file:./view.js",
-  "render": "file:../includes/render.php"
+  "render": "file:./render.php"
 }
 ```
 
-**edit.js** - Editor component with inspector controls:
+### edit.js
+
+Editor component with inspector controls:
+
 ```jsx
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, SelectControl, ToggleControl, TextControl } from '@wordpress/components';
+import { PanelBody, RangeControl, SelectControl, ToggleControl } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
   const blockProps = useBlockProps();
@@ -112,7 +113,7 @@ export default function Edit({ attributes, setAttributes }) {
     <>
       <InspectorControls>
         <PanelBody title={__('Settings', 'flextype')}>
-          {/* Controls here */}
+          {/* Controls */}
         </PanelBody>
       </InspectorControls>
       <div {...blockProps}>
@@ -123,134 +124,42 @@ export default function Edit({ attributes, setAttributes }) {
 }
 ```
 
-**save.js** - Returns null for dynamic blocks:
-```jsx
-export default function save() {
-  return null;
-}
+### render.php
+
+Server-side render with data attributes for JS:
+
+```php
+<?php
+$wrapper_attributes = get_block_wrapper_attributes([
+    'data-size-steps'     => $attributes['sizeSteps'],
+    'data-min-scale'      => $attributes['minScale'],
+    'data-max-scale'      => $attributes['maxScale'],
+    'data-control-style'  => $attributes['controlStyle'],
+    'data-target-selector'=> $attributes['targetSelector'],
+]);
+?>
+<div <?php echo wp_kses_post( $wrapper_attributes ); ?>>
+    <!-- Control markup -->
+</div>
 ```
 
-**view.js** - Frontend interactivity:
+### view.js
+
+Frontend interactivity:
+
 ```javascript
+const STORAGE_KEY = 'flextypeScale';
+const CSS_PROPERTY = '--flextype-scale';
+
 document.addEventListener('DOMContentLoaded', () => {
   const blocks = document.querySelectorAll('.wp-block-flextype-text-resizer');
   blocks.forEach(initBlock);
 });
 ```
 
-### Working with Styles
+## Debugging
 
-**editor.scss** - Editor-specific styles:
-```scss
-.wp-block-flextype-text-resizer {
-  // Editor preview styles
-}
-```
-
-**style.scss** - Frontend styles (also loaded in editor):
-```scss
-.wp-block-flextype-text-resizer {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  &__label {
-    font-weight: 500;
-  }
-
-  &__controls {
-    display: flex;
-    gap: 0.25rem;
-  }
-
-  &__button {
-    // Button styles
-  }
-}
-```
-
-## Adding Inspector Controls
-
-Use WordPress components for the settings panel:
-
-```jsx
-<InspectorControls>
-  <PanelBody title={__('Display Settings', 'flextype')}>
-    <RangeControl
-      label={__('Size Steps', 'flextype')}
-      value={attributes.sizeSteps}
-      onChange={(value) => setAttributes({ sizeSteps: value })}
-      min={2}
-      max={5}
-    />
-    <SelectControl
-      label={__('Control Style', 'flextype')}
-      value={attributes.controlStyle}
-      options={[
-        { label: 'Buttons', value: 'buttons' },
-        { label: 'Slider', value: 'slider' },
-        { label: 'Icons', value: 'icons' },
-      ]}
-      onChange={(value) => setAttributes({ controlStyle: value })}
-    />
-    <ToggleControl
-      label={__('Show Label', 'flextype')}
-      checked={attributes.showLabel}
-      onChange={(value) => setAttributes({ showLabel: value })}
-    />
-  </PanelBody>
-</InspectorControls>
-```
-
-## Frontend JavaScript Pattern
-
-```javascript
-// view.js
-const STORAGE_KEY = 'flextypeScale';
-const CSS_PROPERTY = '--flextype-scale';
-
-function initBlock(container) {
-  const config = {
-    sizeSteps: parseInt(container.dataset.sizeSteps, 10),
-    minScale: parseFloat(container.dataset.minScale),
-    maxScale: parseFloat(container.dataset.maxScale),
-    targetSelector: container.dataset.targetSelector,
-    controlStyle: container.dataset.controlStyle,
-  };
-
-  // Calculate scale values
-  const scales = calculateScales(config);
-
-  // Restore saved preference
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    applyScale(saved, config.targetSelector);
-  }
-
-  // Bind event handlers
-  bindControls(container, scales, config);
-}
-
-function calculateScales({ sizeSteps, minScale, maxScale }) {
-  const scales = [];
-  const step = (maxScale - minScale) / (sizeSteps - 1);
-  for (let i = 0; i < sizeSteps; i++) {
-    scales.push(minScale + (step * i));
-  }
-  return scales;
-}
-
-function applyScale(scale, targetSelector) {
-  const target = document.querySelector(targetSelector);
-  if (target) {
-    target.style.setProperty(CSS_PROPERTY, scale);
-  }
-}
-```
-
-## Debugging Tips
-
-### Enable WordPress Debug Mode
+### WordPress Debug Mode
 
 ```php
 // wp-config.php
@@ -261,23 +170,15 @@ define('SCRIPT_DEBUG', true);
 
 ### Browser DevTools
 
-- Check localStorage: `localStorage.getItem('flextypeScale')`
-- Inspect CSS property: Look for `--flextype-scale` in computed styles
-- Console logging: `console.log('FlexType:', config)`
-
-### Block Editor Debugging
-
-- Open browser console in Site Editor
-- Check for block registration: `wp.blocks.getBlockTypes().find(b => b.name === 'flextype/text-resizer')`
-- Inspect block attributes in React DevTools
+- localStorage: `localStorage.getItem('flextypeScale')`
+- CSS property: Check computed styles for `--flextype-scale`
+- Block registration: `wp.blocks.getBlockTypes().find(b => b.name === 'flextype/text-resizer')`
 
 ## Code Standards
 
-- Follow [WordPress JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/)
-- Use ES6+ features (transpiled by @wordpress/scripts)
-- Keep functions small and focused
-- Add JSDoc comments for complex functions
-- Prefer `const` over `let`, avoid `var`
+- PHP: WordPress Coding Standards (via PHPCS)
+- JavaScript: @wordpress/eslint-plugin
+- CSS/SCSS: @wordpress/stylelint-config + @stylistic/stylelint-plugin
 
 ## Building for Production
 
@@ -285,7 +186,4 @@ define('SCRIPT_DEBUG', true);
 npm run build
 ```
 
-This creates optimized assets in the `build/` directory:
-- Minified JavaScript
-- Processed CSS
-- Asset manifest for cache busting
+Creates optimized, minified assets in `build/` with cache-busting manifests.

@@ -130,19 +130,39 @@ If value exists:
   - Set active state on matching control
 ```
 
-## File Responsibilities
+## File Structure
 
-| File | Responsibility |
-|------|----------------|
-| `flextype.php` | Plugin bootstrap, block registration, asset enqueueing |
-| `src/block.json` | Block metadata, attributes schema, supports config |
-| `src/index.js` | Block registration entry point |
-| `src/edit.js` | Editor component with inspector controls |
-| `src/save.js` | Minimal save (dynamic block returns null) |
-| `src/view.js` | Frontend interactivity (runs on page load) |
-| `src/editor.scss` | Editor-only styles |
-| `src/style.scss` | Frontend styles (buttons, slider, etc.) |
-| `includes/render.php` | Server-side render callback |
+```
+flextype/
+├── flextype.php                    # Plugin bootstrap, block registration
+├── package.json                    # Dependencies and scripts
+├── composer.json                   # PHP dependencies
+├── readme.txt                      # WP.org readme
+├── .nvmrc                          # Node version
+├── phpcs.xml.dist                  # PHP coding standards
+├── .stylelintrc.json               # CSS linting
+├── .eslintrc.js                    # JS linting (via @wordpress/scripts)
+├── docs/                           # Documentation
+│   ├── ARCHITECTURE.md             # This file
+│   ├── DEVELOPMENT.md              # Development guide
+│   ├── IMPLEMENTATION.md           # Implementation checklist
+│   ├── REQUIREMENTS.md             # Project requirements
+│   └── TESTING.md                  # Testing guide
+├── src/
+│   └── flextype/                   # Block source files
+│       ├── block.json              # Block metadata & attributes
+│       ├── index.js                # Block registration
+│       ├── edit.js                 # Editor component
+│       ├── view.js                 # Frontend interactivity
+│       ├── render.php              # Server-side render
+│       ├── editor.scss             # Editor-only styles
+│       └── style.scss              # Frontend styles
+├── build/                          # Compiled assets (gitignored)
+└── .github/
+    ├── workflows/
+    │   └── build.yml               # CI workflow
+    └── PULL_REQUEST_TEMPLATE.md    # PR template
+```
 
 ## Block Attributes Schema
 
