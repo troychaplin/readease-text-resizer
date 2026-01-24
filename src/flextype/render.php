@@ -101,6 +101,11 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		</div>
 
 	<?php elseif ( 'slider' === $control_style ) : ?>
+		<?php
+		// Calculate step to match sizeSteps setting.
+		$slider_step = ( $max_scale - $min_scale ) / ( $size_steps - 1 );
+		$slider_step = round( $slider_step, 4 );
+		?>
 		<div class="wp-block-flextype-text-resizer__controls wp-block-flextype-text-resizer__controls--slider">
 			<span class="wp-block-flextype-text-resizer__slider-label wp-block-flextype-text-resizer__slider-label--min">A</span>
 			<input
@@ -108,7 +113,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				class="wp-block-flextype-text-resizer__slider"
 				min="<?php echo esc_attr( $min_scale ); ?>"
 				max="<?php echo esc_attr( $max_scale ); ?>"
-				step="0.05"
+				step="<?php echo esc_attr( $slider_step ); ?>"
 				value="1"
 				aria-label="<?php esc_attr_e( 'Text size', 'flextype' ); ?>"
 			/>
@@ -146,6 +151,33 @@ $wrapper_attributes = get_block_wrapper_attributes(
 					<path d="M11 12.5V17.5H12.5V12.5H17.5V11H12.5V6H11V11H6V12.5H11Z" fill="currentColor"/>
 				</svg>
 			</button>
+		</div>
+
+	<?php elseif ( 'dropdown' === $control_style ) : ?>
+		<div class="wp-block-flextype-text-resizer__controls wp-block-flextype-text-resizer__controls--dropdown">
+			<select
+				class="wp-block-flextype-text-resizer__select"
+				aria-label="<?php esc_attr_e( 'Text size', 'flextype' ); ?>"
+			>
+				<?php foreach ( $scales as $index => $scale ) : ?>
+					<?php
+					$is_default = ( $index === $default_index );
+					$percentage = round( $scale * 100 );
+					if ( $is_default ) {
+						$option_label = __( 'Default', 'flextype' );
+					} else {
+						/* translators: %d: percentage value */
+						$option_label = sprintf( __( '%d%%', 'flextype' ), $percentage );
+					}
+					?>
+					<option
+						value="<?php echo esc_attr( $scale ); ?>"
+						<?php selected( $is_default ); ?>
+					>
+						<?php echo esc_html( $option_label ); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
 		</div>
 	<?php endif; ?>
 </div>

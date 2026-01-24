@@ -43,8 +43,9 @@ return array(
 			),
 			'controlStyle' => array(
 				'type' => 'string',
-				'default' => 'buttons',
+				'default' => 'dropdown',
 				'enum' => array(
+					'dropdown',
 					'buttons',
 					'slider',
 					'icons'

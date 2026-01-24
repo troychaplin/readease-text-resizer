@@ -83,12 +83,16 @@ function ButtonsPreview({ sizeSteps, minScale, maxScale }) {
 /**
  * SliderPreview component - renders the slider control style
  *
- * @param {Object} props          Component props
- * @param {number} props.minScale Minimum scale value
- * @param {number} props.maxScale Maximum scale value
+ * @param {Object} props           Component props
+ * @param {number} props.sizeSteps Number of size steps
+ * @param {number} props.minScale  Minimum scale value
+ * @param {number} props.maxScale  Maximum scale value
  * @return {Element} Slider preview element
  */
-function SliderPreview({ minScale, maxScale }) {
+function SliderPreview({ sizeSteps, minScale, maxScale }) {
+	// Calculate step to match sizeSteps setting
+	const step = (maxScale - minScale) / (sizeSteps - 1);
+
 	return (
 		<div className="wp-block-flextype-text-resizer__controls wp-block-flextype-text-resizer__controls--slider">
 			<span className="wp-block-flextype-text-resizer__slider-label wp-block-flextype-text-resizer__slider-label--min">
@@ -99,13 +103,60 @@ function SliderPreview({ minScale, maxScale }) {
 				className="wp-block-flextype-text-resizer__slider"
 				min={minScale}
 				max={maxScale}
-				step="0.05"
+				step={step}
 				defaultValue="1"
 				aria-label={__('Text size', 'flextype')}
 			/>
 			<span className="wp-block-flextype-text-resizer__slider-label wp-block-flextype-text-resizer__slider-label--max">
 				A
 			</span>
+		</div>
+	);
+}
+
+/**
+ * DropdownPreview component - renders the dropdown control style
+ *
+ * @param {Object} props           Component props
+ * @param {number} props.sizeSteps Number of size steps
+ * @param {number} props.minScale  Minimum scale value
+ * @param {number} props.maxScale  Maximum scale value
+ * @return {Element} Dropdown preview element
+ */
+function DropdownPreview({ sizeSteps, minScale, maxScale }) {
+	const scales = [];
+	const step = (maxScale - minScale) / (sizeSteps - 1);
+	for (let i = 0; i < sizeSteps; i++) {
+		scales.push(minScale + step * i);
+	}
+
+	// Find the default (1.0) or middle index
+	let defaultIndex = scales.findIndex((s) => Math.abs(s - 1) < 0.01);
+	if (defaultIndex === -1) {
+		defaultIndex = Math.floor(sizeSteps / 2);
+	}
+
+	return (
+		<div className="wp-block-flextype-text-resizer__controls wp-block-flextype-text-resizer__controls--dropdown">
+			<select
+				className="wp-block-flextype-text-resizer__select"
+				aria-label={__('Text size', 'flextype')}
+				defaultValue={scales[defaultIndex]}
+			>
+				{scales.map((scale, index) => {
+					const isDefault = index === defaultIndex;
+					const percentage = Math.round(scale * 100);
+					const label = isDefault
+						? __('Default', 'flextype')
+						: `${percentage}%`;
+
+					return (
+						<option key={index} value={scale}>
+							{label}
+						</option>
+					);
+				})}
+			</select>
 		</div>
 	);
 }
@@ -205,6 +256,10 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Control Style', 'flextype')}
 						value={controlStyle}
 						options={[
+							{
+								label: __('Dropdown', 'flextype'),
+								value: 'dropdown',
+							},
 							{
 								label: __('Buttons (A- A A+)', 'flextype'),
 								value: 'buttons',
@@ -313,6 +368,13 @@ export default function Edit({ attributes, setAttributes }) {
 							{labelText}
 						</span>
 					)}
+					{controlStyle === 'dropdown' && (
+						<DropdownPreview
+							sizeSteps={sizeSteps}
+							minScale={minScale}
+							maxScale={maxScale}
+						/>
+					)}
 					{controlStyle === 'buttons' && (
 						<ButtonsPreview
 							sizeSteps={sizeSteps}
@@ -322,6 +384,7 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 					{controlStyle === 'slider' && (
 						<SliderPreview
+							sizeSteps={sizeSteps}
 							minScale={minScale}
 							maxScale={maxScale}
 						/>

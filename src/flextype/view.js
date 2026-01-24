@@ -212,7 +212,9 @@
 			const minScale = parseFloat(container.dataset.minScale);
 			const maxScale = parseFloat(container.dataset.maxScale);
 
-			if (controlStyle === 'buttons') {
+			if (controlStyle === 'dropdown') {
+				updateDropdownValue(container, scale);
+			} else if (controlStyle === 'buttons') {
 				updateButtonStates(container, scale);
 			} else if (controlStyle === 'slider') {
 				updateSliderValue(container, scale);
@@ -277,6 +279,49 @@
 		slider.addEventListener('change', () => {
 			const scale = parseFloat(slider.value);
 			saveScale(scale);
+		});
+	}
+
+	/**
+	 * Update dropdown value
+	 *
+	 * @param {HTMLElement} container Block container element
+	 * @param {number}      scale     Current scale value
+	 */
+	function updateDropdownValue(container, scale) {
+		const select = container.querySelector(
+			'.wp-block-flextype-text-resizer__select'
+		);
+		if (select) {
+			select.value = scale;
+		}
+	}
+
+	/**
+	 * Initialize dropdown control style
+	 *
+	 * @param {HTMLElement} container      Block container element
+	 * @param {string}      targetSelector Target element selector
+	 * @param {number}      currentScale   Current scale value
+	 */
+	function initDropdown(container, targetSelector, currentScale) {
+		const select = container.querySelector(
+			'.wp-block-flextype-text-resizer__select'
+		);
+
+		if (!select) {
+			return;
+		}
+
+		// Set initial value
+		select.value = currentScale;
+
+		// Update on change
+		select.addEventListener('change', () => {
+			const scale = parseFloat(select.value);
+			applyScale(scale, targetSelector);
+			saveScale(scale);
+			updateAllControls(scale);
 		});
 	}
 
@@ -361,7 +406,9 @@
 		applyScale(currentScale, targetSelector);
 
 		// Initialize based on control style
-		if (controlStyle === 'buttons') {
+		if (controlStyle === 'dropdown') {
+			initDropdown(container, targetSelector, currentScale);
+		} else if (controlStyle === 'buttons') {
 			initButtons(container, targetSelector, currentScale);
 		} else if (controlStyle === 'slider') {
 			initSlider(container, targetSelector, currentScale);

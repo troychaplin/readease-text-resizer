@@ -32,8 +32,8 @@
 		},
 		"controlStyle": {
 			"type": "string",
-			"default": "buttons",
-			"enum": [ "buttons", "slider", "icons" ]
+			"default": "dropdown",
+			"enum": [ "dropdown", "buttons", "slider", "icons" ]
 		},
 		"showLabel": {
 			"type": "boolean",

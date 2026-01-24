@@ -38,8 +38,9 @@
     },
     "controlStyle": {
       "type": "string",
-      "default": "buttons",
+      "default": "dropdown",
       "enum": [
+        "dropdown",
         "buttons",
         "slider",
         "icons"
