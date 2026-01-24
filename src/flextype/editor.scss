@@ -1,9 +1,195 @@
 /**
- * The following styles get applied inside the editor only.
+ * FlexType Text Resizer - Editor Styles
  *
- * Replace them with your own styles or remove the file completely.
+ * These styles apply only in the block editor.
+ *
+ * @package FlexType
  */
 
-.wp-block-create-block-flextype {
-	border: 1px dotted #f00;
+// Editor-specific wrapper styles
+.wp-block-flextype-text-resizer {
+	// Ensure preview is visible in editor even with mobile-only setting
+	&--mobile-only {
+		display: flex;
+	}
+}
+
+// Preview wrapper in editor (inside Disabled component)
+.wp-block-flextype-text-resizer__preview {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+	align-items: center;
+	width: 100%;
+}
+
+// Preview label
+.wp-block-flextype-text-resizer__preview-label {
+	font-weight: 500;
+	font-size: 0.875em;
+}
+
+// Preview controls container
+.wp-block-flextype-text-resizer__preview-controls {
+	display: flex;
+	align-items: center;
+	gap: 0.25em;
+
+	&--buttons {
+		gap: 0;
+	}
+
+	&--slider {
+		gap: 0.5em;
+	}
+}
+
+// Preview button text
+.wp-block-flextype-text-resizer__preview-button-text {
+	line-height: 1;
+
+	&--small {
+		font-size: 0.75em;
+	}
+
+	&--medium {
+		font-size: 1em;
+	}
+
+	&--large {
+		font-size: 1.25em;
+	}
+}
+
+// Preview buttons
+.wp-block-flextype-text-resizer__preview-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0.5em;
+	border: 1px solid currentcolor;
+	border-radius: 0;
+	background: transparent;
+	color: inherit;
+	font-family: inherit;
+	font-weight: 500;
+
+	&:not(:first-child) {
+		margin-inline-start: -1px;
+	}
+
+	&:first-child {
+		border-start-start-radius: 4px;
+		border-end-start-radius: 4px;
+	}
+
+	&:last-child {
+		border-start-end-radius: 4px;
+		border-end-end-radius: 4px;
+	}
+
+	&--active {
+		background-color: currentcolor;
+	}
+}
+
+// Active preview button text
+.wp-block-flextype-text-resizer__preview-button--active .wp-block-flextype-text-resizer__preview-button-text {
+	filter: invert(1);
+}
+
+// Preview slider
+.wp-block-flextype-text-resizer__preview-slider {
+	width: 120px;
+	height: 8px;
+	margin: 0;
+	padding: 0;
+	border-radius: 4px;
+	background: rgba(0, 0, 0, 0.1);
+	appearance: none;
+
+	&::-webkit-slider-runnable-track {
+		height: 8px;
+		border-radius: 4px;
+		background: rgba(0, 0, 0, 0.1);
+	}
+
+	&::-webkit-slider-thumb {
+		width: 20px;
+		height: 20px;
+		margin-top: -6px;
+		border: 2px solid currentcolor;
+		border-radius: 50%;
+		background: #fff;
+		appearance: none;
+	}
+
+	&::-moz-range-track {
+		height: 8px;
+		border-radius: 4px;
+		background: rgba(0, 0, 0, 0.1);
+	}
+
+	&::-moz-range-thumb {
+		width: 20px;
+		height: 20px;
+		border: 2px solid currentcolor;
+		border-radius: 50%;
+		background: #fff;
+	}
+}
+
+// Preview slider labels
+.wp-block-flextype-text-resizer__preview-slider-label {
+	font-weight: 500;
+	line-height: 1;
+
+	&--min {
+		font-size: 0.75em;
+	}
+
+	&--max {
+		font-size: 1.25em;
+	}
+}
+
+// Preview icon text
+.wp-block-flextype-text-resizer__preview-icon-text {
+	font-weight: 600;
+	font-size: 1.125em;
+	line-height: 1;
+}
+
+// Preview icon buttons
+.wp-block-flextype-text-resizer__preview-icon-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border: 1px solid currentcolor;
+	border-radius: 4px;
+	background: transparent;
+	color: inherit;
+
+	svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	&--active {
+		background-color: currentcolor;
+
+		svg {
+			filter: invert(1);
+		}
+	}
+}
+
+// Active preview icon text
+.wp-block-flextype-text-resizer__preview-icon-button--active .wp-block-flextype-text-resizer__preview-icon-text {
+	filter: invert(1);
 }

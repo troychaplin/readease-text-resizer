@@ -1,15 +1,96 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "create-block/flextype",
+  "name": "flextype/text-resizer",
   "version": "0.1.0",
-  "title": "Flextype",
-  "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "title": "FlexType Text Resizer",
+  "category": "theme",
+  "icon": "editor-textcolor",
+  "description": "Let visitors resize text for improved readability and accessibility.",
+  "keywords": [
+    "text",
+    "size",
+    "accessibility",
+    "resize",
+    "font"
+  ],
   "example": {},
+  "attributes": {
+    "sizeSteps": {
+      "type": "number",
+      "default": 3
+    },
+    "minScale": {
+      "type": "number",
+      "default": 1
+    },
+    "maxScale": {
+      "type": "number",
+      "default": 1.2
+    },
+    "mobileOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "targetSelector": {
+      "type": "string",
+      "default": "body"
+    },
+    "controlStyle": {
+      "type": "string",
+      "default": "buttons",
+      "enum": [
+        "buttons",
+        "slider",
+        "icons"
+      ]
+    },
+    "showLabel": {
+      "type": "boolean",
+      "default": true
+    },
+    "labelText": {
+      "type": "string",
+      "default": "Text Size"
+    }
+  },
   "supports": {
-    "html": false
+    "html": false,
+    "align": [
+      "left",
+      "center",
+      "right"
+    ],
+    "color": {
+      "background": true,
+      "text": true,
+      "link": false,
+      "__experimentalDefaultControls": {
+        "background": false,
+        "text": false
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "__experimentalDefaultControls": {
+        "padding": true
+      }
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": false
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": false,
+        "radius": true
+      }
+    }
   },
   "textdomain": "flextype",
   "editorScript": "file:./index.js",
