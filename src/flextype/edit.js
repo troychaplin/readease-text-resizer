@@ -328,6 +328,27 @@ export default function Edit({ attributes, setAttributes }) {
 					title={__('Scale Settings', 'flextype')}
 					initialOpen={true}
 				>
+					<SelectControl
+						label={__('Scale Scope', 'flextype')}
+						help={__(
+							'Choose which parts of the page to resize.',
+							'flextype'
+						)}
+						value={scaleScope}
+						options={[
+							{
+								label: __('Full Page', 'flextype'),
+								value: 'full-page',
+							},
+							{
+								label: __('Exclude Template Parts', 'flextype'),
+								value: 'exclude-template',
+							},
+						]}
+						onChange={(value) =>
+							setAttributes({ scaleScope: value })
+						}
+					/>
 					<RangeControl
 						label={__('Size Steps', 'flextype')}
 						help={__(
@@ -364,27 +385,6 @@ export default function Edit({ attributes, setAttributes }) {
 						min={1.1}
 						max={1.5}
 						step={0.05}
-					/>
-					<SelectControl
-						label={__('Scale Scope', 'flextype')}
-						help={__(
-							'Choose which parts of the page to resize.',
-							'flextype'
-						)}
-						value={scaleScope}
-						options={[
-							{
-								label: __('Full Page', 'flextype'),
-								value: 'full-page',
-							},
-							{
-								label: __('Exclude Template Parts', 'flextype'),
-								value: 'exclude-template',
-							},
-						]}
-						onChange={(value) =>
-							setAttributes({ scaleScope: value })
-						}
 					/>
 				</PanelBody>
 			</InspectorControls>
