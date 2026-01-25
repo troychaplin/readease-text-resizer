@@ -31,6 +31,20 @@
 		'figcaption',
 	];
 
+	// Template part selectors to exclude when scaleScope is 'exclude-template'
+	const TEMPLATE_PART_SELECTORS = [
+		'header',
+		'.site-header',
+		'.wp-block-template-part[data-slug="header"]',
+		'footer',
+		'.site-footer',
+		'.wp-block-template-part[data-slug="footer"]',
+		'nav',
+		'.site-navigation',
+		'.wp-block-navigation',
+		'#wpadminbar',
+	];
+
 	/**
 	 * Get or create the dynamic style element
 	 *
@@ -47,22 +61,28 @@
 	}
 
 	/**
+	 * Build exclusion selector for template parts
+	 *
+	 * @param {string} element The text element to build exclusion for
+	 * @return {string} CSS selector with exclusions
+	 */
+	function buildExclusionSelector(element) {
+		const exclusions = TEMPLATE_PART_SELECTORS.map(
+			(tpl) => `:not(${tpl} ${element})`
+		).join('');
+		return `body ${element}${exclusions}`;
+	}
+
+	/**
 	 * Apply scale to target element and inject scaling CSS
 	 *
-	 * @param {number} scale          Scale value to apply
-	 * @param {string} targetSelector CSS selector for target element
+	 * @param {number} scale        Scale value to apply
+	 * @param {string} scaleScope   Scale scope setting ('full-page' or 'exclude-template')
+	 * @param {string} customTarget Custom CSS selector (overrides scaleScope if provided)
 	 */
-	function applyScale(scale, targetSelector) {
+	function applyScale(scale, scaleScope, customTarget) {
 		// Set CSS custom property on :root for reference
 		document.documentElement.style.setProperty(CSS_PROPERTY, scale);
-
-		// Also set on target element if different from body
-		if (targetSelector && targetSelector !== 'body') {
-			const target = document.querySelector(targetSelector);
-			if (target) {
-				target.style.setProperty(CSS_PROPERTY, scale);
-			}
-		}
 
 		// Get or create style element
 		const styleEl = getStyleElement();
@@ -73,15 +93,21 @@
 			return;
 		}
 
-		// Build the selector based on target, excluding admin bar
+		// Build the selector based on scope
 		let selector;
-		if (targetSelector && targetSelector !== 'body') {
-			// Scope to target selector
-			selector = TEXT_ELEMENTS.map(
-				(el) => `${targetSelector} ${el}`
+
+		if (customTarget && customTarget.trim() !== '') {
+			// Custom target selector takes precedence
+			selector = TEXT_ELEMENTS.map((el) => `${customTarget} ${el}`).join(
+				', '
+			);
+		} else if (scaleScope === 'exclude-template') {
+			// Exclude template parts (header, footer, nav)
+			selector = TEXT_ELEMENTS.map((el) =>
+				buildExclusionSelector(el)
 			).join(', ');
 		} else {
-			// Default: target all text elements but exclude admin bar
+			// Full page: target all text elements but exclude admin bar
 			selector = TEXT_ELEMENTS.map(
 				(el) => `body ${el}:not(#wpadminbar ${el})`
 			).join(', ');
@@ -227,11 +253,12 @@
 	/**
 	 * Initialize buttons control style
 	 *
-	 * @param {HTMLElement} container      Block container element
-	 * @param {string}      targetSelector Target element selector
-	 * @param {number}      currentScale   Current scale value
+	 * @param {HTMLElement} container    Block container element
+	 * @param {string}      scaleScope   Scale scope setting
+	 * @param {string}      customTarget Custom target selector
+	 * @param {number}      currentScale Current scale value
 	 */
-	function initButtons(container, targetSelector, currentScale) {
+	function initButtons(container, scaleScope, customTarget, currentScale) {
 		const buttons = container.querySelectorAll(
 			'.wp-block-flextype-text-resizer__button'
 		);
@@ -239,7 +266,7 @@
 		buttons.forEach((button) => {
 			button.addEventListener('click', () => {
 				const scale = parseFloat(button.dataset.scale);
-				applyScale(scale, targetSelector);
+				applyScale(scale, scaleScope, customTarget);
 				saveScale(scale);
 				updateAllControls(scale);
 			});
@@ -252,11 +279,12 @@
 	/**
 	 * Initialize slider control style
 	 *
-	 * @param {HTMLElement} container      Block container element
-	 * @param {string}      targetSelector Target element selector
-	 * @param {number}      currentScale   Current scale value
+	 * @param {HTMLElement} container    Block container element
+	 * @param {string}      scaleScope   Scale scope setting
+	 * @param {string}      customTarget Custom target selector
+	 * @param {number}      currentScale Current scale value
 	 */
-	function initSlider(container, targetSelector, currentScale) {
+	function initSlider(container, scaleScope, customTarget, currentScale) {
 		const slider = container.querySelector(
 			'.wp-block-flextype-text-resizer__slider'
 		);
@@ -271,7 +299,7 @@
 		// Update on input (while dragging)
 		slider.addEventListener('input', () => {
 			const scale = parseFloat(slider.value);
-			applyScale(scale, targetSelector);
+			applyScale(scale, scaleScope, customTarget);
 			updateAllControls(scale);
 		});
 
@@ -300,11 +328,12 @@
 	/**
 	 * Initialize dropdown control style
 	 *
-	 * @param {HTMLElement} container      Block container element
-	 * @param {string}      targetSelector Target element selector
-	 * @param {number}      currentScale   Current scale value
+	 * @param {HTMLElement} container    Block container element
+	 * @param {string}      scaleScope   Scale scope setting
+	 * @param {string}      customTarget Custom target selector
+	 * @param {number}      currentScale Current scale value
 	 */
-	function initDropdown(container, targetSelector, currentScale) {
+	function initDropdown(container, scaleScope, customTarget, currentScale) {
 		const select = container.querySelector(
 			'.wp-block-flextype-text-resizer__select'
 		);
@@ -319,7 +348,7 @@
 		// Update on change
 		select.addEventListener('change', () => {
 			const scale = parseFloat(select.value);
-			applyScale(scale, targetSelector);
+			applyScale(scale, scaleScope, customTarget);
 			saveScale(scale);
 			updateAllControls(scale);
 		});
@@ -328,15 +357,17 @@
 	/**
 	 * Initialize icons control style
 	 *
-	 * @param {HTMLElement} container      Block container element
-	 * @param {string}      targetSelector Target element selector
-	 * @param {number}      currentScale   Current scale value
-	 * @param {number}      minScale       Minimum scale
-	 * @param {number}      maxScale       Maximum scale
+	 * @param {HTMLElement} container    Block container element
+	 * @param {string}      scaleScope   Scale scope setting
+	 * @param {string}      customTarget Custom target selector
+	 * @param {number}      currentScale Current scale value
+	 * @param {number}      minScale     Minimum scale
+	 * @param {number}      maxScale     Maximum scale
 	 */
 	function initIcons(
 		container,
-		targetSelector,
+		scaleScope,
+		customTarget,
 		currentScale,
 		minScale,
 		maxScale
@@ -353,7 +384,7 @@
 			decreaseBtn.addEventListener('click', () => {
 				scale = Math.max(minScale, scale - step);
 				scale = Math.round(scale * 100) / 100;
-				applyScale(scale, targetSelector);
+				applyScale(scale, scaleScope, customTarget);
 				saveScale(scale);
 				updateAllControls(scale);
 			});
@@ -362,7 +393,7 @@
 		if (resetBtn) {
 			resetBtn.addEventListener('click', () => {
 				scale = 1;
-				applyScale(scale, targetSelector);
+				applyScale(scale, scaleScope, customTarget);
 				saveScale(scale);
 				updateAllControls(scale);
 			});
@@ -372,7 +403,7 @@
 			increaseBtn.addEventListener('click', () => {
 				scale = Math.min(maxScale, scale + step);
 				scale = Math.round(scale * 100) / 100;
-				applyScale(scale, targetSelector);
+				applyScale(scale, scaleScope, customTarget);
 				saveScale(scale);
 				updateAllControls(scale);
 			});
@@ -388,7 +419,8 @@
 	 * @param {HTMLElement} container Block container element
 	 */
 	function initBlock(container) {
-		const targetSelector = container.dataset.targetSelector || 'body';
+		const scaleScope = container.dataset.scaleScope || 'exclude-template';
+		const customTarget = container.dataset.targetSelector || '';
 		const controlStyle = container.dataset.controlStyle || 'buttons';
 		const minScale = parseFloat(container.dataset.minScale) || 1;
 		const maxScale = parseFloat(container.dataset.maxScale) || 1.2;
@@ -403,19 +435,20 @@
 		currentScale = Math.max(minScale, Math.min(maxScale, currentScale));
 
 		// Apply saved scale (only injects CSS if scale !== 1)
-		applyScale(currentScale, targetSelector);
+		applyScale(currentScale, scaleScope, customTarget);
 
 		// Initialize based on control style
 		if (controlStyle === 'dropdown') {
-			initDropdown(container, targetSelector, currentScale);
+			initDropdown(container, scaleScope, customTarget, currentScale);
 		} else if (controlStyle === 'buttons') {
-			initButtons(container, targetSelector, currentScale);
+			initButtons(container, scaleScope, customTarget, currentScale);
 		} else if (controlStyle === 'slider') {
-			initSlider(container, targetSelector, currentScale);
+			initSlider(container, scaleScope, customTarget, currentScale);
 		} else if (controlStyle === 'icons') {
 			initIcons(
 				container,
-				targetSelector,
+				scaleScope,
+				customTarget,
 				currentScale,
 				minScale,
 				maxScale
@@ -438,13 +471,16 @@
 			return;
 		}
 
-		// Get target selector from first block
+		// Get scope settings from first block
 		const firstBlock = document.querySelector(BLOCK_SELECTOR);
-		const targetSelector = firstBlock
-			? firstBlock.dataset.targetSelector
-			: 'body';
+		const scaleScope = firstBlock
+			? firstBlock.dataset.scaleScope || 'exclude-template'
+			: 'exclude-template';
+		const customTarget = firstBlock
+			? firstBlock.dataset.targetSelector || ''
+			: '';
 
-		applyScale(scale, targetSelector);
+		applyScale(scale, scaleScope, customTarget);
 		updateAllControls(scale);
 	}
 

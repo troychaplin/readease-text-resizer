@@ -31,15 +31,23 @@ return array(
 			),
 			'maxScale' => array(
 				'type' => 'number',
-				'default' => 1.2
+				'default' => 1.5
 			),
 			'mobileOnly' => array(
 				'type' => 'boolean',
 				'default' => false
 			),
+			'scaleScope' => array(
+				'type' => 'string',
+				'default' => 'exclude-template',
+				'enum' => array(
+					'exclude-template',
+					'full-page'
+				)
+			),
 			'targetSelector' => array(
 				'type' => 'string',
-				'default' => 'body'
+				'default' => ''
 			),
 			'controlStyle' => array(
 				'type' => 'string',

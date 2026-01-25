@@ -26,15 +26,23 @@
     },
     "maxScale": {
       "type": "number",
-      "default": 1.2
+      "default": 1.5
     },
     "mobileOnly": {
       "type": "boolean",
       "default": false
     },
+    "scaleScope": {
+      "type": "string",
+      "default": "exclude-template",
+      "enum": [
+        "exclude-template",
+        "full-page"
+      ]
+    },
     "targetSelector": {
       "type": "string",
-      "default": "body"
+      "default": ""
     },
     "controlStyle": {
       "type": "string",
