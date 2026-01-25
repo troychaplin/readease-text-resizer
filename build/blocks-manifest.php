@@ -51,9 +51,14 @@ return array(
 					'icons'
 				)
 			),
-			'showLabel' => array(
-				'type' => 'boolean',
-				'default' => true
+			'labelPosition' => array(
+				'type' => 'string',
+				'default' => 'side',
+				'enum' => array(
+					'top',
+					'side',
+					'hidden'
+				)
 			),
 			'labelText' => array(
 				'type' => 'string',
@@ -72,8 +77,8 @@ return array(
 				'text' => true,
 				'link' => false,
 				'__experimentalDefaultControls' => array(
-					'background' => false,
-					'text' => false
+					'background' => true,
+					'text' => true
 				)
 			),
 			'spacing' => array(
@@ -81,20 +86,6 @@ return array(
 				'padding' => true,
 				'__experimentalDefaultControls' => array(
 					'padding' => true
-				)
-			),
-			'typography' => array(
-				'fontSize' => true,
-				'lineHeight' => false
-			),
-			'__experimentalBorder' => array(
-				'color' => true,
-				'radius' => true,
-				'style' => true,
-				'width' => true,
-				'__experimentalDefaultControls' => array(
-					'color' => false,
-					'radius' => true
 				)
 			)
 		),

@@ -46,9 +46,14 @@
         "icons"
       ]
     },
-    "showLabel": {
-      "type": "boolean",
-      "default": true
+    "labelPosition": {
+      "type": "string",
+      "default": "side",
+      "enum": [
+        "top",
+        "side",
+        "hidden"
+      ]
     },
     "labelText": {
       "type": "string",
@@ -67,8 +72,8 @@
       "text": true,
       "link": false,
       "__experimentalDefaultControls": {
-        "background": false,
-        "text": false
+        "background": true,
+        "text": true
       }
     },
     "spacing": {
@@ -76,20 +81,6 @@
       "padding": true,
       "__experimentalDefaultControls": {
         "padding": true
-      }
-    },
-    "typography": {
-      "fontSize": true,
-      "lineHeight": false
-    },
-    "__experimentalBorder": {
-      "color": true,
-      "radius": true,
-      "style": true,
-      "width": true,
-      "__experimentalDefaultControls": {
-        "color": false,
-        "radius": true
       }
     }
   },

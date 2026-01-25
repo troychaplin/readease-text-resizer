@@ -18,8 +18,8 @@ $min_scale       = isset( $attributes['minScale'] ) ? floatval( $attributes['min
 $max_scale       = isset( $attributes['maxScale'] ) ? floatval( $attributes['maxScale'] ) : 1.2;
 $mobile_only     = isset( $attributes['mobileOnly'] ) ? $attributes['mobileOnly'] : false;
 $target_selector = isset( $attributes['targetSelector'] ) ? $attributes['targetSelector'] : 'body';
-$control_style   = isset( $attributes['controlStyle'] ) ? $attributes['controlStyle'] : 'buttons';
-$show_label      = isset( $attributes['showLabel'] ) ? $attributes['showLabel'] : true;
+$control_style   = isset( $attributes['controlStyle'] ) ? $attributes['controlStyle'] : 'dropdown';
+$label_position  = isset( $attributes['labelPosition'] ) ? $attributes['labelPosition'] : 'side';
 $label_text      = isset( $attributes['labelText'] ) ? $attributes['labelText'] : __( 'Text Size', 'flextype' );
 
 // Calculate scale values.
@@ -41,7 +41,8 @@ foreach ( $scales as $index => $scale ) {
 }
 
 // Build additional classes.
-$additional_classes = 'wp-block-flextype-text-resizer--' . esc_attr( $control_style );
+$additional_classes  = 'wp-block-flextype-text-resizer--' . esc_attr( $control_style );
+$additional_classes .= ' wp-block-flextype-text-resizer--label-' . esc_attr( $label_position );
 if ( $mobile_only ) {
 	$additional_classes .= ' wp-block-flextype-text-resizer--mobile-only';
 }
@@ -61,12 +62,17 @@ $wrapper_attributes = get_block_wrapper_attributes(
 );
 
 ?>
+<?php
+// Build label class.
+$label_class = 'wp-block-flextype-text-resizer__label';
+if ( 'hidden' === $label_position ) {
+	$label_class .= ' wp-block-flextype-text-resizer__label--hidden';
+}
+?>
 <div <?php echo wp_kses_post( $wrapper_attributes ); ?>>
-	<?php if ( $show_label ) : ?>
-		<span class="wp-block-flextype-text-resizer__label">
-			<?php echo esc_html( $label_text ); ?>
-		</span>
-	<?php endif; ?>
+	<span class="<?php echo esc_attr( $label_class ); ?>">
+		<?php echo esc_html( $label_text ); ?>
+	</span>
 
 	<?php if ( 'buttons' === $control_style ) : ?>
 		<div class="wp-block-flextype-text-resizer__controls wp-block-flextype-text-resizer__controls--buttons" role="group" aria-label="<?php esc_attr_e( 'Text size controls', 'flextype' ); ?>">

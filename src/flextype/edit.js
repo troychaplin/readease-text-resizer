@@ -11,8 +11,8 @@ import {
 	PanelBody,
 	RangeControl,
 	SelectControl,
-	ToggleControl,
 	TextControl,
+	ToggleControl,
 	Disabled,
 } from '@wordpress/components';
 
@@ -235,14 +235,20 @@ export default function Edit({ attributes, setAttributes }) {
 		mobileOnly,
 		targetSelector,
 		controlStyle,
-		showLabel,
+		labelPosition,
 		labelText,
 	} = attributes;
 
+	const classNames = [
+		`wp-block-flextype-text-resizer--${controlStyle}`,
+		`wp-block-flextype-text-resizer--label-${labelPosition}`,
+		mobileOnly ? 'wp-block-flextype-text-resizer--mobile-only' : '',
+	]
+		.filter(Boolean)
+		.join(' ');
+
 	const blockProps = useBlockProps({
-		className: `wp-block-flextype-text-resizer--${controlStyle}${
-			mobileOnly ? ' wp-block-flextype-text-resizer--mobile-only' : ''
-		}`,
+		className: classNames,
 	});
 
 	return (
@@ -277,22 +283,34 @@ export default function Edit({ attributes, setAttributes }) {
 							setAttributes({ controlStyle: value })
 						}
 					/>
-					<ToggleControl
-						label={__('Show Label', 'flextype')}
-						checked={showLabel}
+					<SelectControl
+						label={__('Label Position', 'flextype')}
+						value={labelPosition}
+						options={[
+							{
+								label: __('Side', 'flextype'),
+								value: 'side',
+							},
+							{
+								label: __('Top', 'flextype'),
+								value: 'top',
+							},
+							{
+								label: __('Hidden', 'flextype'),
+								value: 'hidden',
+							},
+						]}
 						onChange={(value) =>
-							setAttributes({ showLabel: value })
+							setAttributes({ labelPosition: value })
 						}
 					/>
-					{showLabel && (
-						<TextControl
-							label={__('Label Text', 'flextype')}
-							value={labelText}
-							onChange={(value) =>
-								setAttributes({ labelText: value })
-							}
-						/>
-					)}
+					<TextControl
+						label={__('Label Text', 'flextype')}
+						value={labelText}
+						onChange={(value) =>
+							setAttributes({ labelText: value })
+						}
+					/>
 					<ToggleControl
 						label={__('Mobile Only', 'flextype')}
 						help={__(
@@ -307,7 +325,7 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 				<PanelBody
 					title={__('Scale Settings', 'flextype')}
-					initialOpen={false}
+					initialOpen={true}
 				>
 					<RangeControl
 						label={__('Size Steps', 'flextype')}
@@ -362,12 +380,16 @@ export default function Edit({ attributes, setAttributes }) {
 				/>
 			</InspectorAdvancedControls>
 			<div {...blockProps}>
+				<span
+					className={`wp-block-flextype-text-resizer__label${
+						labelPosition === 'hidden'
+							? ' wp-block-flextype-text-resizer__label--hidden'
+							: ''
+					}`}
+				>
+					{labelText}
+				</span>
 				<Disabled>
-					{showLabel && (
-						<span className="wp-block-flextype-text-resizer__label">
-							{labelText}
-						</span>
-					)}
 					{controlStyle === 'dropdown' && (
 						<DropdownPreview
 							sizeSteps={sizeSteps}
