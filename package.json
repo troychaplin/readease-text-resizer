@@ -21,9 +21,9 @@
 		"prepare": "husky"
 	},
 	"devDependencies": {
-		"@stylistic/stylelint-plugin": "^4.0.1",
 		"@wordpress/block-editor": "latest",
 		"@wordpress/blocks": "latest",
+        "@wordpress/components": "^32.0.0",
 		"@wordpress/env": "^10.38.0",
 		"@wordpress/eslint-plugin": "^24.0.0",
 		"@wordpress/i18n": "^6.11.0",

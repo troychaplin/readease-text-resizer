@@ -31,6 +31,8 @@
 				<element value="FlexType"/>
 			</property>
 		</properties>
+		<!-- Block render files use scoped variables, not globals -->
+		<exclude-pattern>src/*/render\.php</exclude-pattern>
 	</rule>
 
 	<!-- Ensure that all text-domains use our custom value. -->

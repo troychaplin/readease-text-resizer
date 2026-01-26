@@ -1,15 +1,96 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "create-block/flextype",
+  "name": "flextype/text-resizer",
   "version": "0.1.0",
-  "title": "Flextype",
-  "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "title": "FlexType Text Resizer",
+  "category": "theme",
+  "icon": "editor-textcolor",
+  "description": "Let visitors resize text for improved readability and accessibility.",
+  "keywords": [
+    "text",
+    "size",
+    "accessibility",
+    "resize",
+    "font"
+  ],
   "example": {},
+  "attributes": {
+    "sizeSteps": {
+      "type": "number",
+      "default": 3
+    },
+    "minScale": {
+      "type": "number",
+      "default": 1
+    },
+    "maxScale": {
+      "type": "number",
+      "default": 1.5
+    },
+    "mobileOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "scaleScope": {
+      "type": "string",
+      "default": "exclude-template",
+      "enum": [
+        "exclude-template",
+        "full-page"
+      ]
+    },
+    "targetSelector": {
+      "type": "string",
+      "default": ""
+    },
+    "controlStyle": {
+      "type": "string",
+      "default": "dropdown",
+      "enum": [
+        "dropdown",
+        "buttons",
+        "slider",
+        "icons"
+      ]
+    },
+    "labelPosition": {
+      "type": "string",
+      "default": "side",
+      "enum": [
+        "top",
+        "side",
+        "hidden"
+      ]
+    },
+    "labelText": {
+      "type": "string",
+      "default": "Text Size"
+    }
+  },
   "supports": {
-    "html": false
+    "html": false,
+    "align": [
+      "left",
+      "center",
+      "right"
+    ],
+    "color": {
+      "background": true,
+      "text": true,
+      "link": false,
+      "__experimentalDefaultControls": {
+        "background": true,
+        "text": true
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "__experimentalDefaultControls": {
+        "padding": true
+      }
+    }
   },
   "textdomain": "flextype",
   "editorScript": "file:./index.js",

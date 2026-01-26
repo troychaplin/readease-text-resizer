@@ -1,9 +1,16 @@
 /**
- * The following styles get applied inside the editor only.
+ * FlexType Text Resizer - Editor Styles
  *
- * Replace them with your own styles or remove the file completely.
+ * These styles apply only in the block editor.
+ * The main component styles come from style.scss which is loaded in both contexts.
+ *
+ * @package FlexType
  */
 
-.wp-block-create-block-flextype {
-	border: 1px dotted #f00;
+// Editor-specific overrides
+.wp-block-flextype-text-resizer {
+	// Ensure preview is visible in editor even with mobile-only setting
+	&--mobile-only {
+		display: flex;
+	}
 }

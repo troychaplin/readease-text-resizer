@@ -1,17 +1,10 @@
 {
 	"extends": ["@wordpress/stylelint-config/scss"],
-	"plugins": ["@stylistic/stylelint-plugin"],
 	"rules": {
 		"at-rule-empty-line-before": null,
 		"at-rule-no-unknown": null,
 		"rule-empty-line-before": null,
 		"selector-class-pattern": null,
-		"scss/at-rule-no-unknown": true,
-		"block-no-empty": true,
-		"no-empty-source": true,
-		"@stylistic/indentation": "tab",
-		"@stylistic/no-missing-end-of-source-newline": true,
-		"@stylistic/no-eol-whitespace": true,
-		"@stylistic/declaration-block-trailing-semicolon": "always"
+		"scss/at-rule-no-unknown": true
 	}
 }
