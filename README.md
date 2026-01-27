@@ -1,8 +1,10 @@
-<img src="assets/banner-772x250.png" alt="A graphical representation of a navigation before and after enabling the priority plus navigation functionality" style="width: 100%; height: auto;">
+<img src="assets/banner-772x250.png" alt="Sketch-style illustration showing the letter A growing progressively larger from left to right" style="width: 100%; height: auto;">
 
 # ReadEase: Text Resizer
 
 A Gutenberg block that lets site visitors resize text for improved readability and accessibility.
+
+> **PluginJam Hackathon Entry** - This plugin was developed as part of the [PluginJam](https://pluginjam.com/) hackathon, created by [Nik McLaughlin](https://nikmclaughlin.com/), with the theme "Growth". ReadEase embodies growth in a literal, interactive way - visitors can grow the text on your site to meet their accessibility needs.
 
 ## Features
 
