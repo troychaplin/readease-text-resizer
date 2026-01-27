@@ -1,9 +1,9 @@
 /**
- * FlexType Text Resizer - Frontend Styles
+ * Text_Resizer Text Resizer - Frontend Styles
  *
  * These styles apply to both the frontend and the editor.
  *
- * @package FlexType
+ * @package Text_Resizer
  */
 
 // =============================================================================
@@ -12,14 +12,14 @@
 
 // Default scale value on :root (1 = no change to theme defaults)
 :root {
-	--flextype-scale: 1;
+	--text-resizer-scale: 1;
 }
 
 // Scaling styles are injected by JavaScript only when scale !== 1
 // This preserves theme defaults at scale 1 and applies multiplier when changed
 
 // Block container
-.wp-block-flextype-text-resizer {
+.wp-block-readease-text-resizer {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.75em;
@@ -45,7 +45,7 @@
 }
 
 // Label
-.wp-block-flextype-text-resizer__label {
+.wp-block-readease-text-resizer__label {
 	font-weight: 500;
 	font-size: 0.875em;
 
@@ -64,7 +64,7 @@
 }
 
 // Controls container (shared)
-.wp-block-flextype-text-resizer__controls {
+.wp-block-readease-text-resizer__controls {
 	display: flex;
 	align-items: center;
 	gap: 0.25em;
@@ -74,16 +74,16 @@
 // Buttons Style
 // =============================================================================
 
-.wp-block-flextype-text-resizer__controls--buttons {
+.wp-block-readease-text-resizer__controls--buttons {
 	gap: 0;
 }
 
 // Button text (the "A" character) - defined first for proper cascade
-.wp-block-flextype-text-resizer__button-text {
+.wp-block-readease-text-resizer__button-text {
 	line-height: 1;
 }
 
-.wp-block-flextype-text-resizer__button {
+.wp-block-readease-text-resizer__button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -137,30 +137,30 @@
 			background-color: currentcolor;
 		}
 
-		.wp-block-flextype-text-resizer__button-text {
+		.wp-block-readease-text-resizer__button-text {
 			// Invert text color when background is currentColor
 			filter: invert(1);
 		}
 	}
 
 	// Size variations for buttons - progressive sizing
-	&[data-index="0"] .wp-block-flextype-text-resizer__button-text {
+	&[data-index="0"] .wp-block-readease-text-resizer__button-text {
 		font-size: 0.75em;
 	}
 
-	&[data-index="1"] .wp-block-flextype-text-resizer__button-text {
+	&[data-index="1"] .wp-block-readease-text-resizer__button-text {
 		font-size: 1em;
 	}
 
-	&[data-index="2"] .wp-block-flextype-text-resizer__button-text {
+	&[data-index="2"] .wp-block-readease-text-resizer__button-text {
 		font-size: 1.25em;
 	}
 
-	&[data-index="3"] .wp-block-flextype-text-resizer__button-text {
+	&[data-index="3"] .wp-block-readease-text-resizer__button-text {
 		font-size: 1.5em;
 	}
 
-	&[data-index="4"] .wp-block-flextype-text-resizer__button-text {
+	&[data-index="4"] .wp-block-readease-text-resizer__button-text {
 		font-size: 1.75em;
 	}
 }
@@ -169,11 +169,11 @@
 // Slider Style
 // =============================================================================
 
-.wp-block-flextype-text-resizer__controls--slider {
+.wp-block-readease-text-resizer__controls--slider {
 	gap: 0.5em;
 }
 
-.wp-block-flextype-text-resizer__slider {
+.wp-block-readease-text-resizer__slider {
 	width: 120px;
 	height: 8px;
 	margin: 0;
@@ -247,7 +247,7 @@
 }
 
 // Slider labels (min/max "A" indicators)
-.wp-block-flextype-text-resizer__slider-label {
+.wp-block-readease-text-resizer__slider-label {
 	font-weight: 500;
 	line-height: 1;
 
@@ -264,11 +264,11 @@
 // Dropdown Style
 // =============================================================================
 
-.wp-block-flextype-text-resizer__controls--dropdown {
+.wp-block-readease-text-resizer__controls--dropdown {
 	gap: 0;
 }
 
-.wp-block-flextype-text-resizer__select {
+.wp-block-readease-text-resizer__select {
 	min-width: 100px;
 	min-height: 44px;
 	padding: 0.5em 2em 0.5em 0.75em;
@@ -310,18 +310,18 @@
 // Icons Style
 // =============================================================================
 
-.wp-block-flextype-text-resizer__controls--icons {
+.wp-block-readease-text-resizer__controls--icons {
 	gap: 0.25em;
 }
 
 // Icon button text (the "A" for reset) - defined first for proper cascade
-.wp-block-flextype-text-resizer__icon-text {
+.wp-block-readease-text-resizer__icon-text {
 	font-weight: 600;
 	font-size: 1.125em;
 	line-height: 1;
 }
 
-.wp-block-flextype-text-resizer__icon-button {
+.wp-block-readease-text-resizer__icon-button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -366,7 +366,7 @@
 			filter: invert(1);
 		}
 
-		.wp-block-flextype-text-resizer__icon-text {
+		.wp-block-readease-text-resizer__icon-text {
 			filter: invert(1);
 		}
 
@@ -381,10 +381,10 @@
 // =============================================================================
 
 @media (prefers-reduced-motion: reduce) {
-	.wp-block-flextype-text-resizer__button,
-	.wp-block-flextype-text-resizer__icon-button,
-	.wp-block-flextype-text-resizer__slider::-webkit-slider-thumb,
-	.wp-block-flextype-text-resizer__slider::-moz-range-thumb {
+	.wp-block-readease-text-resizer__button,
+	.wp-block-readease-text-resizer__icon-button,
+	.wp-block-readease-text-resizer__slider::-webkit-slider-thumb,
+	.wp-block-readease-text-resizer__slider::-moz-range-thumb {
 		transition: none;
 	}
 }

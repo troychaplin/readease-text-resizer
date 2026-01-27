@@ -1,7 +1,7 @@
 {
-	"name": "flextype",
-	"version": "0.1.0",
-	"description": "FlexType is a Gutenberg block plugin that provides visitor text resizing controls.",
+	"name": "text-resizer",
+	"version": "1.0.0",
+	"description": "A Gutenberg block that lets site visitors resize text for improved readability and accessibility.",
 	"author": "Troy Chaplin",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",

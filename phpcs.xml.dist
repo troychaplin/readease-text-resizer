@@ -20,15 +20,15 @@
 
 	<!-- Allow the main plugin file to contain a class without class- prefix -->
 	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
-		<exclude-pattern>flextype\.php</exclude-pattern>
+		<exclude-pattern>text-resizer.php</exclude-pattern>
 	</rule>
 
 	<!-- Ensure that all variables in global context start with this prefix -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
-				<element value="flextype"/>
-				<element value="FlexType"/>
+				<element value="text_resizer"/>
+				<element value="Text_Resizer"/>
 			</property>
 		</properties>
 		<!-- Block render files use scoped variables, not globals -->
@@ -39,7 +39,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="flextype"/>
+				<element value="text-resizer"/>
 			</property>
 		</properties>
 	</rule>

@@ -1,4 +1,4 @@
-# FlexType
+# ReadEase: Text Resizer
 
 A Gutenberg block that lets site visitors resize text for improved readability and accessibility.
 
@@ -23,10 +23,10 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 
 ## Installation
 
-1. Clone or download to `wp-content/plugins/flextype`
+1. Clone or download to `wp-content/plugins/text-resizer`
 2. Run `npm install` and `npm run build`
 3. Activate the plugin in WordPress
-4. Add the FlexType block to any template using the Site Editor
+4. Add the Text_Resizer block to any template using the Site Editor
 
 ## Usage
 

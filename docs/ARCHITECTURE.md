@@ -1,8 +1,8 @@
-# FlexType Architecture
+# Text_Resizer Architecture
 
 ## Overview
 
-FlexType is a Gutenberg block plugin that provides text resizing controls for site visitors. This document outlines the technical architecture and component relationships.
+Text_Resizer is a Gutenberg block plugin that provides text resizing controls for site visitors. This document outlines the technical architecture and component relationships.
 
 ## Component Diagram
 
@@ -12,7 +12,7 @@ FlexType is a Gutenberg block plugin that provides text resizing controls for si
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │                    Site Editor                             │  │
 │  │  ┌─────────────────┐    ┌─────────────────────────────┐   │  │
-│  │  │  Block Library  │───▶│  FlexType Block (edit.js)   │   │  │
+│  │  │  Block Library  │───▶│  Text_Resizer Block (edit.js)   │   │  │
 │  │  └─────────────────┘    │  - Inspector Controls        │   │  │
 │  │                         │  - Live Preview              │   │  │
 │  │                         └─────────────────────────────┘   │  │
@@ -42,7 +42,7 @@ FlexType is a Gutenberg block plugin that provides text resizing controls for si
 │                                ▼                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │                  CSS Custom Property                       │  │
-│  │  --flextype-scale applied to target selector              │  │
+│  │  --text-resizer-scale applied to target selector              │  │
 │  └───────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -83,7 +83,7 @@ render.php receives attributes
 Outputs HTML with data-* attributes
         │
         ▼
-<div class="wp-block-flextype-text-resizer"
+<div class="wp-block-readease-text-resizer"
      data-size-steps="3"
      data-min-scale="0.9"
      data-max-scale="1.3"
@@ -107,10 +107,10 @@ Calculate new scale value
         ▼
 Apply CSS custom property:
 document.querySelector(targetSelector)
-  .style.setProperty('--flextype-scale', newScale)
+  .style.setProperty('--text-resizer-scale', newScale)
         │
         ▼
-Save to localStorage('flextypeScale')
+Save to localStorage('text-resizerScale')
         │
         ▼
 Update active state on controls
@@ -122,7 +122,7 @@ Update active state on controls
 Page load
         │
         ▼
-view.js reads localStorage('flextypeScale')
+view.js reads localStorage('text-resizerScale')
         │
         ▼
 If value exists:
@@ -133,8 +133,8 @@ If value exists:
 ## File Structure
 
 ```
-flextype/
-├── flextype.php                    # Plugin bootstrap, block registration
+text-resizer/
+├── text-resizer.php                    # Plugin bootstrap, block registration
 ├── package.json                    # Dependencies and scripts
 ├── composer.json                   # PHP dependencies
 ├── readme.txt                      # WP.org readme
@@ -149,7 +149,7 @@ flextype/
 │   ├── REQUIREMENTS.md             # Project requirements
 │   └── TESTING.md                  # Testing guide
 ├── src/
-│   └── flextype/                   # Block source files
+│   └── text-resizer/                   # Block source files
 │       ├── block.json              # Block metadata & attributes
 │       ├── index.js                # Block registration
 │       ├── edit.js                 # Editor component
@@ -211,12 +211,12 @@ The plugin uses CSS custom properties for maximum flexibility:
 ```css
 /* Injected by plugin */
 :root {
-  --flextype-scale: 1;
+  --text-resizer-scale: 1;
 }
 
 /* Theme or plugin applies to target */
 body {
-  font-size: calc(1rem * var(--flextype-scale, 1));
+  font-size: calc(1rem * var(--text-resizer-scale, 1));
   transition: font-size 0.2s ease;
 }
 ```
@@ -229,7 +229,7 @@ body {
 
 ## Multiple Instance Handling
 
-When multiple FlexType blocks exist on a page:
+When multiple Text_Resizer blocks exist on a page:
 
 1. All instances share the same localStorage key
 2. All instances listen for `storage` events
@@ -239,7 +239,7 @@ When multiple FlexType blocks exist on a page:
 ```javascript
 // Sync across instances
 window.addEventListener('storage', (e) => {
-  if (e.key === 'flextypeScale') {
+  if (e.key === 'text-resizerScale') {
     applyScale(e.newValue);
     updateAllControls(e.newValue);
   }

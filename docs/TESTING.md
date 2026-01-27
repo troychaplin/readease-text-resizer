@@ -1,11 +1,11 @@
-# FlexType Testing Guide
+# Text_Resizer Testing Guide
 
-This document provides a comprehensive guide for testing the FlexType Text Resizer block.
+This document provides a comprehensive guide for testing the Text_Resizer Text Resizer block.
 
 ## Prerequisites
 
 1. WordPress 6.4+ with a block theme (e.g., Twenty Twenty-Five)
-2. FlexType plugin activated
+2. Text_Resizer plugin activated
 3. Build completed: `npm run build`
 
 ## Quick Start Testing
@@ -14,13 +14,13 @@ This document provides a comprehensive guide for testing the FlexType Text Resiz
 
 1. Open the WordPress block editor (Site Editor or Post Editor)
 2. Click the inserter (+ button)
-3. Search for "FlexType" or "text resizer"
+3. Search for "Text_Resizer" or "text resizer"
 4. Verify the block appears under the "Theme" category
 5. Verify the icon displays correctly
 
 ### 2. Add the Block
 
-1. Insert the FlexType Text Resizer block
+1. Insert the Text_Resizer Text Resizer block
 2. Verify the block renders a preview in the editor
 3. Verify the inspector panel appears when the block is selected
 
@@ -105,14 +105,14 @@ This document provides a comprehensive guide for testing the FlexType Text Resiz
 
 1. Set a non-default scale (e.g., click the largest button)
 2. Open browser DevTools → Application → Local Storage
-3. Verify key `flextypeScale` exists with the scale value
+3. Verify key `text-resizerScale` exists with the scale value
 4. Refresh the page
 5. Verify the scale is restored (same button active, same text size)
 
 ### Cross-Page Persistence
 
 1. On Page A, set scale to maximum
-2. Navigate to Page B (also has FlexType block)
+2. Navigate to Page B (also has Text_Resizer block)
 3. Verify the same scale is applied
 4. Change scale on Page B
 5. Return to Page A
@@ -146,7 +146,7 @@ This document provides a comprehensive guide for testing the FlexType Text Resiz
 ### Screen Reader Testing
 
 1. Using VoiceOver (Mac) or NVDA (Windows):
-2. Navigate to the FlexType block
+2. Navigate to the Text_Resizer block
 3. Verify the group is announced as "Text size controls"
 4. Verify each button announces its purpose:
    - "Decrease text size"
@@ -214,7 +214,7 @@ This document provides a comprehensive guide for testing the FlexType Text Resiz
 
 ## Multiple Instances Testing
 
-1. Add two FlexType blocks on the same page
+1. Add two Text_Resizer blocks on the same page
 2. Interact with the first block
 3. Verify the second block syncs (same scale, same active state)
 4. Change scale on second block
@@ -231,13 +231,13 @@ This document provides a comprehensive guide for testing the FlexType Text Resiz
 
 ### Invalid localStorage
 
-1. In DevTools Console, run: `localStorage.setItem('flextypeScale', 'invalid')`
+1. In DevTools Console, run: `localStorage.setItem('text-resizerScale', 'invalid')`
 2. Refresh the page
 3. Verify block defaults to 1.0 (graceful fallback)
 
 ### Scale Out of Range
 
-1. In DevTools Console, run: `localStorage.setItem('flextypeScale', '5.0')`
+1. In DevTools Console, run: `localStorage.setItem('text-resizerScale', '5.0')`
 2. Refresh the page
 3. Verify scale is clamped to maxScale
 

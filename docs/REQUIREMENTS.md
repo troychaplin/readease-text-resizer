@@ -1,4 +1,4 @@
-# FlexType
+# Text_Resizer
 
 A Gutenberg block that lets site visitors resize text for improved readability and accessibility.
 
@@ -6,7 +6,7 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 
 **Theme: Grow**
 
-FlexType embodies "grow" in a literal, interactive way—visitors can grow the text on your site to meet their needs. The text physically grows in response to user interaction, making accessibility feel dynamic rather than clinical.
+Text_Resizer embodies "grow" in a literal, interactive way—visitors can grow the text on your site to meet their needs. The text physically grows in response to user interaction, making accessibility feel dynamic rather than clinical.
 
 ---
 
@@ -46,7 +46,7 @@ A simple, native Gutenberg block for block themes that provides site visitors wi
 
 ### Block Registration
 
-- **Block name:** `flextype/text-resizer`
+- **Block name:** `readease/text-resizer`
 - **Category:** `theme` (or `widgets`)
 - **Supports:**
   - `align`: `left`, `center`, `right`
@@ -58,9 +58,9 @@ A simple, native Gutenberg block for block themes that provides site visitors wi
 
 1. Block renders a small UI component (buttons/slider/icons)
 2. JavaScript handles click/change events
-3. Applies a CSS custom property to the target selector: `--flextype-scale: 1.1`
-4. Site's CSS uses this variable: `font-size: calc(1rem * var(--flextype-scale, 1))`
-5. Preference saved to `localStorage` key: `flextypeScale`
+3. Applies a CSS custom property to the target selector: `--text-resizer-scale: 1.1`
+4. Site's CSS uses this variable: `font-size: calc(1rem * var(--text-resizer-scale, 1))`
+5. Preference saved to `localStorage` key: `text-resizerScale`
 6. On page load, script checks localStorage and applies saved preference
 
 ### CSS Strategy
@@ -69,12 +69,12 @@ The block injects a small inline style or relies on theme.json integration:
 
 ```css
 :root {
-  --flextype-scale: 1;
+  --text-resizer-scale: 1;
 }
 
 /* Applied to target selector */
 body {
-  font-size: calc(1rem * var(--flextype-scale, 1));
+  font-size: calc(1rem * var(--text-resizer-scale, 1));
 }
 ```
 
@@ -92,8 +92,8 @@ Alternatively, use `zoom` or `transform: scale()` for broader effect (with trade
 ## File Structure
 
 ```
-flextype/
-├── flextype.php                   # Plugin bootstrap
+text-resizer/
+├── text-resizer.php                   # Plugin bootstrap
 ├── readme.txt                     # WP.org readme
 ├── REQUIREMENTS.md                # This file
 ├── src/

@@ -1,6 +1,6 @@
 {
-	"name": "troychaplin/flextype",
-	"description": "FlexType is a Gutenberg block plugin that provides visitor text resizing controls.",
+	"name": "readease/text-resizer",
+	"description": "A Gutenberg block that lets site visitors adjust text size for easier reading.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"require-dev": {

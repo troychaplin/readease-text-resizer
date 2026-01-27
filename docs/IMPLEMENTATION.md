@@ -1,13 +1,13 @@
-# FlexType Implementation Checklist
+# Text_Resizer Implementation Checklist
 
-Step-by-step implementation guide for building the FlexType block, leveraging WordPress core functionality wherever possible.
+Step-by-step implementation guide for building the Text_Resizer block, leveraging WordPress core functionality wherever possible.
 
 ## Phase 1: Block Foundation
 
 ### 1.1 Update block.json
 
-- [ ] Change block name from `create-block/flextype` to `flextype/text-resizer`
-- [ ] Update title to "FlexType Text Resizer"
+- [ ] Change block name from `create-block/text-resizer` to `readease/text-resizer`
+- [ ] Update title to "Text_Resizer Text Resizer"
 - [ ] Update description
 - [ ] Change category from `widgets` to `theme`
 - [ ] Update icon (use Dashicon `editor-textcolor` or `@wordpress/icons`)
@@ -149,7 +149,7 @@ The Interactivity API is WordPress core's solution for frontend interactivity:
 ### 4.2 Standard Approach (vanilla JS)
 
 - [ ] Use `DOMContentLoaded` or module pattern
-- [ ] Query blocks via class `.wp-block-flextype-text-resizer`
+- [ ] Query blocks via class `.wp-block-readease-text-resizer`
 - [ ] Read config from `data-*` attributes
 - [ ] Use `localStorage` for persistence
 - [ ] Use `window.addEventListener('storage')` for cross-tab sync
@@ -207,7 +207,7 @@ Block supports automatically generate classes - use these instead of custom:
 
 ```css
 :root {
-  --flextype-scale: 1;
+  --text-resizer-scale: 1;
 }
 ```
 
@@ -262,7 +262,7 @@ Block supports automatically generate classes - use these instead of custom:
 ### 9.1 Block Patterns (future)
 
 - [ ] Register via `register_block_pattern()`
-- [ ] Pre-configured FlexType with styling
+- [ ] Pre-configured Text_Resizer with styling
 
 ### 9.2 Block Bindings API (WP 6.5+)
 

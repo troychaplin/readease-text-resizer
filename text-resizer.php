@@ -1,16 +1,17 @@
 <?php
 /**
- * Plugin Name:       FlexType
- * Description:       FlexType is a Gutenberg block plugin that provides visitor text resizing controls.
- * Version:           0.1.0
+ * Plugin Name:       Text Resizer
+ * Description:       A Gutenberg block that lets site visitors resize text for improved readability and accessibility.
+ * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
- * Author:            The WordPress Contributors
+ * Author:            Troy Chaplin
+ * Author URI:        https://troychaplin.ca/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       flextype
+ * Text Domain:       text-resizer
  *
- * @package FlexType
+ * @package Text_Resizer
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,21 +19,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Main plugin class for FlexType.
+ * Main plugin class for Text_Resizer.
  */
-class FlexType {
+class Text_Resizer {
 
 	/**
 	 * Constructor. Registers hooks for admin menu, settings, template, and admin bar.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'create_block_flextype_block_init' ) );
+		add_action( 'init', array( $this, 'create_block_text_resizer_block_init' ) );
 	}
 
 	/**
 	 * Adds the settings page under Settings menu.
 	 */
-	public function create_block_flextype_block_init() {
+	public function create_block_text_resizer_block_init() {
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
 			wp_register_block_types_from_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
 			return;
@@ -49,4 +50,4 @@ class FlexType {
 	}
 }
 
-new FlexType();
+new Text_Resizer();

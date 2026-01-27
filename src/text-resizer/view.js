@@ -1,5 +1,5 @@
 /**
- * FlexType Frontend JavaScript
+ * Text_Resizer Frontend JavaScript
  *
  * Handles text resizing controls on the frontend.
  */
@@ -7,10 +7,10 @@
 (function () {
 	'use strict';
 
-	const STORAGE_KEY = 'flextypeScale';
-	const CSS_PROPERTY = '--flextype-scale';
-	const STYLE_ID = 'flextype-scale-styles';
-	const BLOCK_SELECTOR = '.wp-block-flextype-text-resizer';
+	const STORAGE_KEY = 'text-resizerScale';
+	const CSS_PROPERTY = '--text-resizer-scale';
+	const STYLE_ID = 'text-resizer-scale-styles';
+	const BLOCK_SELECTOR = '.wp-block-readease-text-resizer';
 
 	// Text elements to scale
 	const TEXT_ELEMENTS = [
@@ -163,13 +163,13 @@
 	 */
 	function updateButtonStates(container, scale) {
 		const buttons = container.querySelectorAll(
-			'.wp-block-flextype-text-resizer__button'
+			'.wp-block-readease-text-resizer__button'
 		);
 		buttons.forEach((button) => {
 			const buttonScale = parseFloat(button.dataset.scale);
 			const isActive = Math.abs(buttonScale - scale) < 0.01;
 			button.classList.toggle(
-				'wp-block-flextype-text-resizer__button--active',
+				'wp-block-readease-text-resizer__button--active',
 				isActive
 			);
 			button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
@@ -189,7 +189,7 @@
 		if (resetButton) {
 			const isDefault = Math.abs(scale - 1) < 0.01;
 			resetButton.classList.toggle(
-				'wp-block-flextype-text-resizer__icon-button--active',
+				'wp-block-readease-text-resizer__icon-button--active',
 				isDefault
 			);
 			resetButton.setAttribute(
@@ -218,7 +218,7 @@
 	 */
 	function updateSliderValue(container, scale) {
 		const slider = container.querySelector(
-			'.wp-block-flextype-text-resizer__slider'
+			'.wp-block-readease-text-resizer__slider'
 		);
 		if (slider) {
 			slider.value = scale;
@@ -259,7 +259,7 @@
 	 */
 	function initButtons(container, scaleScope, customTarget, currentScale) {
 		const buttons = container.querySelectorAll(
-			'.wp-block-flextype-text-resizer__button'
+			'.wp-block-readease-text-resizer__button'
 		);
 
 		buttons.forEach((button) => {
@@ -285,7 +285,7 @@
 	 */
 	function initSlider(container, scaleScope, customTarget, currentScale) {
 		const slider = container.querySelector(
-			'.wp-block-flextype-text-resizer__slider'
+			'.wp-block-readease-text-resizer__slider'
 		);
 
 		if (!slider) {
@@ -317,7 +317,7 @@
 	 */
 	function updateDropdownValue(container, scale) {
 		const select = container.querySelector(
-			'.wp-block-flextype-text-resizer__select'
+			'.wp-block-readease-text-resizer__select'
 		);
 		if (select) {
 			select.value = scale;
@@ -334,7 +334,7 @@
 	 */
 	function initDropdown(container, scaleScope, customTarget, currentScale) {
 		const select = container.querySelector(
-			'.wp-block-flextype-text-resizer__select'
+			'.wp-block-readease-text-resizer__select'
 		);
 
 		if (!select) {
@@ -413,7 +413,7 @@
 	}
 
 	/**
-	 * Initialize a single FlexType block
+	 * Initialize a single Text_Resizer block
 	 *
 	 * @param {HTMLElement} container Block container element
 	 */
@@ -484,7 +484,7 @@
 	}
 
 	/**
-	 * Initialize all FlexType blocks on the page
+	 * Initialize all Text_Resizer blocks on the page
 	 */
 	function init() {
 		const blocks = document.querySelectorAll(BLOCK_SELECTOR);

@@ -1,12 +1,12 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
-	'flextype' => array(
+	'text-resizer' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'flextype/text-resizer',
-		'version' => '0.1.0',
-		'title' => 'FlexType Text Resizer',
+		'name' => 'readease/text-resizer',
+		'version' => '1.0.0',
+		'title' => 'ReadEase: Text Resizer',
 		'category' => 'theme',
 		'icon' => 'editor-textcolor',
 		'description' => 'Let visitors resize text for improved readability and accessibility.',
@@ -97,7 +97,7 @@ return array(
 				)
 			)
 		),
-		'textdomain' => 'flextype',
+		'textdomain' => 'text-resizer',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',

@@ -1,8 +1,8 @@
-=== FlexType ===
+=== Text Resizer ===
 Contributors:      areziaal
 Tags:              block, text, accessibility, resize, readability
 Tested up to:      6.7
-Stable tag:        0.1.0
+Stable tag:        1.0.0
 Requires at least: 6.4
 Requires PHP:      7.4
 License:           GPL-2.0-or-later
@@ -12,7 +12,7 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 
 == Description ==
 
-FlexType provides a simple, native Gutenberg block for block themes that gives site visitors control over text size. Theme builders can add the block to any template (header, footer, sidebar) via the Site Editor.
+Text Resizer provides a simple, native Gutenberg block for block themes that gives site visitors control over text size. Theme builders can add the block to any template (header, footer, sidebar) via the Site Editor.
 
 = Features =
 
@@ -56,17 +56,17 @@ FlexType provides a simple, native Gutenberg block for block themes that gives s
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/flextype` or install via the WordPress plugins screen
+1. Upload the plugin files to `/wp-content/plugins/text-resizer` or install via the WordPress plugins screen
 2. Activate the plugin through the 'Plugins' screen
 3. Open the Site Editor (Appearance > Editor)
-4. Add the FlexType block to any template part (header, footer, etc.)
+4. Add the Text Resizer block to any template part (header, footer, etc.)
 5. Configure the block settings in the sidebar panel
 
 == Frequently Asked Questions ==
 
 = Does this work with classic themes? =
 
-FlexType is designed for block themes that support the Site Editor. Classic themes are not supported.
+Text Resizer is designed for block themes that support the Site Editor. Classic themes are not supported.
 
 = Where should I place the block? =
 

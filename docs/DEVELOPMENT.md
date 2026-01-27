@@ -1,4 +1,4 @@
-# FlexType Development Guide
+# Text_Resizer Development Guide
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@
 ### 1. Install Dependencies
 
 ```bash
-cd wp-content/plugins/flextype
+cd wp-content/plugins/text-resizer
 npm install
 composer install
 ```
@@ -45,12 +45,12 @@ npm run format:php
 ## Project Structure
 
 ```
-flextype/
-├── flextype.php                    # Plugin bootstrap
+text-resizer/
+├── text-resizer.php                    # Plugin bootstrap
 ├── package.json                    # Node dependencies and scripts
 ├── composer.json                   # PHP dependencies
 ├── src/
-│   └── flextype/                   # Block source files
+│   └── text-resizer/                   # Block source files
 │       ├── block.json              # Block metadata
 │       ├── index.js                # Block registration
 │       ├── edit.js                 # Editor component
@@ -68,11 +68,11 @@ The `@wordpress/scripts` build generates:
 
 | File | Purpose | Loaded |
 |------|---------|--------|
-| `build/flextype/index.js` | Block registration + editor | Editor only |
-| `build/flextype/index.css` | Editor styles | Editor only |
-| `build/flextype/style-index.css` | Frontend + editor styles | Both |
-| `build/flextype/view.js` | Frontend interactivity | Frontend only |
-| `build/flextype/render.php` | Server-side render | Frontend only |
+| `build/text-resizer/index.js` | Block registration + editor | Editor only |
+| `build/text-resizer/index.css` | Editor styles | Editor only |
+| `build/text-resizer/style-index.css` | Frontend + editor styles | Both |
+| `build/text-resizer/view.js` | Frontend interactivity | Frontend only |
+| `build/text-resizer/render.php` | Server-side render | Frontend only |
 
 ## Key Files
 
@@ -84,8 +84,8 @@ Block metadata, attributes, and asset references:
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "flextype/text-resizer",
-  "title": "FlexType Text Resizer",
+  "name": "readease/text-resizer",
+  "title": "Text_Resizer Text Resizer",
   "category": "theme",
   "attributes": { ... },
   "supports": { ... },
@@ -112,7 +112,7 @@ export default function Edit({ attributes, setAttributes }) {
   return (
     <>
       <InspectorControls>
-        <PanelBody title={__('Settings', 'flextype')}>
+        <PanelBody title={__('Settings', 'text-resizer')}>
           {/* Controls */}
         </PanelBody>
       </InspectorControls>
@@ -148,11 +148,11 @@ $wrapper_attributes = get_block_wrapper_attributes([
 Frontend interactivity:
 
 ```javascript
-const STORAGE_KEY = 'flextypeScale';
-const CSS_PROPERTY = '--flextype-scale';
+const STORAGE_KEY = 'text-resizerScale';
+const CSS_PROPERTY = '--text-resizer-scale';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const blocks = document.querySelectorAll('.wp-block-flextype-text-resizer');
+  const blocks = document.querySelectorAll('.wp-block-readease-text-resizer');
   blocks.forEach(initBlock);
 });
 ```
@@ -170,9 +170,9 @@ define('SCRIPT_DEBUG', true);
 
 ### Browser DevTools
 
-- localStorage: `localStorage.getItem('flextypeScale')`
-- CSS property: Check computed styles for `--flextype-scale`
-- Block registration: `wp.blocks.getBlockTypes().find(b => b.name === 'flextype/text-resizer')`
+- localStorage: `localStorage.getItem('text-resizerScale')`
+- CSS property: Check computed styles for `--text-resizer-scale`
+- Block registration: `wp.blocks.getBlockTypes().find(b => b.name === 'readease/text-resizer')`
 
 ## Code Standards
 

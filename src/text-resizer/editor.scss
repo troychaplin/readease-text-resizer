@@ -1,14 +1,14 @@
 /**
- * FlexType Text Resizer - Editor Styles
+ * Text_Resizer Text Resizer - Editor Styles
  *
  * These styles apply only in the block editor.
  * The main component styles come from style.scss which is loaded in both contexts.
  *
- * @package FlexType
+ * @package Text_Resizer
  */
 
 // Editor-specific overrides
-.wp-block-flextype-text-resizer {
+.wp-block-readease-text-resizer {
 	// Ensure preview is visible in editor even with mobile-only setting
 	&--mobile-only {
 		display: flex;

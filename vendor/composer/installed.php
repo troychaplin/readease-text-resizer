@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'troychaplin/flextype',
+        'name' => 'readease/text-resizer',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '55bc44e8401433cfda4d2ab2d11d4b941bcda428',
+        'reference' => '8fbea59a393e0b5fba4dc3e5e5a129190ec203c3',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -37,6 +37,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'readease/text-resizer' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '8fbea59a393e0b5fba4dc3e5e5a129190ec203c3',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => '3.13.5',
             'version' => '3.13.5.0',
@@ -45,15 +54,6 @@
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(),
             'dev_requirement' => true,
-        ),
-        'troychaplin/flextype' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '55bc44e8401433cfda4d2ab2d11d4b941bcda428',
-            'type' => 'wordpress-plugin',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
         ),
         'wp-coding-standards/wpcs' => array(
             'pretty_version' => '3.3.0',
