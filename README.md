@@ -20,6 +20,8 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 - **Block theme support** - Native color, spacing, and alignment controls
 - **Theme customization** - CSS custom properties for easy style overrides
 
+<img src="assets/demo.gif" alt="An animated GIF providing a demo of the functionality provided by the block" style="width: 100%; height: auto;">
+
 ## Requirements
 
 - WordPress 6.4+
