@@ -1,0 +1,98 @@
+/**
+ * Slider Control Style
+ *
+ * Range input with min/max labels.
+ *
+ * @package Text_Resizer
+ */
+
+.wp-block-readease-text-resizer__controls--slider {
+	gap: 0.5em;
+}
+
+.wp-block-readease-text-resizer__slider {
+	width: var(--text-resizer-slider-width);
+	height: 8px;
+	margin: 0;
+	padding: 0;
+	border-radius: var(--text-resizer-border-radius);
+	background: var(--text-resizer-track-bg);
+	appearance: none;
+	cursor: pointer;
+
+	// Webkit track
+	&::-webkit-slider-runnable-track {
+		height: 8px;
+		border-radius: var(--text-resizer-border-radius);
+		background: var(--text-resizer-track-bg);
+	}
+
+	// Webkit thumb
+	&::-webkit-slider-thumb {
+		width: 20px;
+		height: 20px;
+		margin-top: -6px;
+		border: 2px solid var(--text-resizer-border-color);
+		border-radius: 50%;
+		background: var(--text-resizer-thumb-bg);
+		appearance: none;
+		cursor: pointer;
+		transition: transform var(--text-resizer-transition-duration) ease;
+	}
+
+	// Firefox track
+	&::-moz-range-track {
+		height: 8px;
+		border-radius: var(--text-resizer-border-radius);
+		background: var(--text-resizer-track-bg);
+	}
+
+	// Firefox thumb
+	&::-moz-range-thumb {
+		width: 20px;
+		height: 20px;
+		border: 2px solid var(--text-resizer-border-color);
+		border-radius: 50%;
+		background: var(--text-resizer-thumb-bg);
+		cursor: pointer;
+		transition: transform var(--text-resizer-transition-duration) ease;
+	}
+
+	// Focus state
+	&:focus {
+		outline: none;
+	}
+
+	&:focus::-webkit-slider-thumb {
+		outline: 2px solid var(--text-resizer-border-color);
+		outline-offset: 2px;
+	}
+
+	&:focus::-moz-range-thumb {
+		outline: 2px solid var(--text-resizer-border-color);
+		outline-offset: 2px;
+	}
+
+	// Hover state
+	&:hover::-webkit-slider-thumb {
+		transform: scale(1.1);
+	}
+
+	&:hover::-moz-range-thumb {
+		transform: scale(1.1);
+	}
+}
+
+// Slider labels (min/max "A" indicators)
+.wp-block-readease-text-resizer__slider-label {
+	font-weight: 500;
+	line-height: 1;
+
+	&--min {
+		font-size: 0.75em;
+	}
+
+	&--max {
+		font-size: 1.25em;
+	}
+}

@@ -1,0 +1,27 @@
+/**
+ * Text Resizer - Frontend Styles
+ *
+ * These styles apply to both the frontend and the editor.
+ *
+ * @package Text_Resizer
+ */
+
+// =============================================================================
+// Partials
+// =============================================================================
+// Import order matters: variables → base → controls → utilities
+
+// CSS custom properties (theming API)
+@use "../styles/variables";
+
+// Block container, label, and controls wrapper
+@use "../styles/base";
+
+// Control styles (one file per control type)
+@use "../styles/buttons";
+@use "../styles/slider";
+@use "../styles/dropdown";
+@use "../styles/icons";
+
+// Accessibility utilities (reduced motion, etc.)
+@use "../styles/utilities";
