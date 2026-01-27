@@ -1,3 +1,5 @@
+<img src="assets/banner-772x250.png" alt="A graphical representation of a navigation before and after enabling the priority plus navigation functionality" style="width: 100%; height: auto;">
+
 # ReadEase: Text Resizer
 
 A Gutenberg block that lets site visitors resize text for improved readability and accessibility.
