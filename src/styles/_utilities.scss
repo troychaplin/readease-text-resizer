@@ -1,0 +1,19 @@
+/**
+ * Utility Styles
+ *
+ * Reduced motion preferences and accessibility helpers.
+ *
+ * @package Text_Resizer
+ */
+
+// Reduced Motion
+// Disable transitions for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-readease-text-resizer__button,
+	.wp-block-readease-text-resizer__icon-button,
+	.wp-block-readease-text-resizer__select,
+	.wp-block-readease-text-resizer__slider::-webkit-slider-thumb,
+	.wp-block-readease-text-resizer__slider::-moz-range-thumb {
+		transition: none;
+	}
+}

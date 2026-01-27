@@ -1,19 +1,24 @@
+<img src="assets/banner-772x250.png" alt="Sketch-style illustration showing the letter A growing progressively larger from left to right" style="width: 100%; height: auto;">
+
 # ReadEase: Text Resizer
 
 A Gutenberg block that lets site visitors resize text for improved readability and accessibility.
+
+> **PluginJam Hackathon Entry** - This plugin was developed as part of the [PluginJam](https://pluginjam.com/) hackathon, created by [Nik McLaughlin](https://nikmclaughlin.com/), with the theme "Growth". ReadEase embodies growth in a literal, interactive way - visitors can grow the text on your site to meet their accessibility needs.
 
 ## Features
 
 - **Multiple control styles** - Dropdown, buttons, slider, or minimal icons
 - **Customizable label** - Position label on top, side, or hide it completely
-- **Flexible scale settings** - Configure min/max scale and number of size steps
+- **Flexible scale settings** - Configure min/max scale (1.0x to 1.5x) and size steps (2-5)
 - **Scale scope options** - Apply to full page or exclude template parts (header/footer)
 - **Custom CSS selector** - Target specific elements with advanced selector option
 - **Mobile-only mode** - Optionally show controls only on mobile/tablet devices
-- **Persistent preferences** - Saves user choice via localStorage
-- **Smooth transitions** - CSS-based scaling with smooth animations
+- **Persistent preferences** - Saves user choice via localStorage with cross-tab sync
+- **Smooth transitions** - CSS-based scaling with reduced motion support
 - **Fully accessible** - Keyboard navigable with proper ARIA labels
-- **Block theme support** - Native color and spacing controls
+- **Block theme support** - Native color, spacing, and alignment controls
+- **Theme customization** - CSS custom properties for easy style overrides
 
 ## Requirements
 
@@ -23,10 +28,11 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 
 ## Installation
 
-1. Clone or download to `wp-content/plugins/text-resizer`
-2. Run `npm install` and `npm run build`
-3. Activate the plugin in WordPress
-4. Add the Text_Resizer block to any template using the Site Editor
+1. Clone or download to `wp-content/plugins/readease`
+2. Run `npm install && composer install`
+3. Run `npm run build`
+4. Activate the plugin in WordPress
+5. Add the block to any template using the Site Editor
 
 ## Usage
 
@@ -34,33 +40,139 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 
 | Style | Description |
 |-------|-------------|
-| Dropdown | Select menu with percentage options |
+| Dropdown | Select menu with percentage options (100%, 125%, 150%) |
 | Buttons | Row of "A" buttons in increasing sizes |
-| Slider | Range input with min/max labels |
+| Slider | Range input with min/max "A" labels |
 | Icons | Minimal +/A/- button group |
 
 ### Block Settings
 
 **Display Settings:**
-- Control Style - Choose the UI control type
-- Label Position - Top, side, or hidden
-- Label Text - Customize the label (default: "Text Size")
-- Mobile Only - Show controls only on smaller screens
+
+| Setting | Options | Default |
+|---------|---------|---------|
+| Control Style | dropdown, buttons, slider, icons | dropdown |
+| Label Position | top, side, hidden | side |
+| Label Text | Any string | "Text Size" |
+| Mobile Only | true/false | false |
 
 **Scale Settings:**
-- Scale Scope - Full page or exclude template parts
-- Size Steps - Number of options (2-5)
-- Minimum Scale - Smallest multiplier (1.0-1.2)
-- Maximum Scale - Largest multiplier (1.1-1.5)
+
+| Setting | Range | Default |
+|---------|-------|---------|
+| Scale Scope | full-page, exclude-template | exclude-template |
+| Size Steps | 2-5 | 3 |
+| Minimum Scale | 1.0-1.2 | 1.0 |
+| Maximum Scale | 1.1-1.5 | 1.5 |
 
 **Advanced:**
-- Target Selector - Custom CSS selector for precise control
+
+| Setting | Description |
+|---------|-------------|
+| Target Selector | Custom CSS selector for precise element targeting |
+
+### Block Supports
+
+The block includes native WordPress support for:
+
+- **Colors** - Background and text color
+- **Spacing** - Margin and padding
+- **Alignment** - Left, center, right
+
+## Theme Customization
+
+ReadEase provides CSS custom properties that theme developers can override to match their design system.
+
+### CSS Custom Properties
+
+Add these to your theme's stylesheet to customize the block appearance:
+
+```css
+.wp-block-readease-text-resizer {
+  /* Layout */
+  --text-resizer-gap: 0.75em;              /* Space between label and controls */
+  --text-resizer-controls-gap: 0.25em;     /* Space between control buttons */
+
+  /* Colors */
+  --text-resizer-button-bg: transparent;           /* Button background */
+  --text-resizer-button-bg-hover: rgba(0, 0, 0, 0.05);  /* Hover state */
+  --text-resizer-button-bg-active: currentcolor;   /* Active/selected state */
+  --text-resizer-border-color: currentcolor;       /* Border and focus outline */
+  --text-resizer-track-bg: rgba(0, 0, 0, 0.1);     /* Slider track background */
+  --text-resizer-thumb-bg: #fff;                   /* Slider thumb background */
+
+  /* Borders */
+  --text-resizer-border-width: 1px;        /* Border thickness */
+  --text-resizer-border-radius: 4px;       /* Corner rounding */
+
+  /* Sizing */
+  --text-resizer-min-height: 44px;         /* Minimum touch target size */
+  --text-resizer-slider-width: 120px;      /* Slider width */
+
+  /* Transitions */
+  --text-resizer-transition-duration: 0.15s;  /* Animation speed */
+}
+```
+
+### Example: Pill-Shaped Buttons
+
+```css
+.wp-block-readease-text-resizer {
+  --text-resizer-border-radius: 999px;
+}
+```
+
+### Example: Dark Theme
+
+```css
+.wp-block-readease-text-resizer {
+  --text-resizer-button-bg: rgba(255, 255, 255, 0.1);
+  --text-resizer-button-bg-hover: rgba(255, 255, 255, 0.2);
+  --text-resizer-track-bg: rgba(255, 255, 255, 0.2);
+  --text-resizer-thumb-bg: #333;
+}
+```
+
+### Example: Larger Touch Targets
+
+```css
+.wp-block-readease-text-resizer {
+  --text-resizer-min-height: 52px;
+  --text-resizer-gap: 1em;
+}
+```
+
+## How It Works
+
+1. Block renders a UI component based on the selected control style
+2. JavaScript handles user interactions (clicks, slider changes)
+3. Applies a CSS custom property to the target selector: `--text-resizer-scale: 1.2`
+4. Site CSS uses this variable to scale text: `font-size: calc(1rem * var(--text-resizer-scale, 1))`
+5. Preference is saved to localStorage key: `textResizerScale`
+6. On page load, the saved preference is restored automatically
+
+### Multiple Instances
+
+If multiple Text Resizer blocks exist on a page:
+- All instances share the same localStorage key
+- All instances listen for storage events
+- When one changes, others sync automatically
+
+## Accessibility
+
+- All controls are keyboard accessible
+- ARIA labels on buttons: "Decrease text size", "Reset text size", "Increase text size"
+- `aria-pressed` indicates the active state
+- Respects `prefers-reduced-motion` for transitions
+- Visible focus states on all interactive elements
+- Minimum touch target size of 44px
 
 ## Development
 
 ```bash
 # Install dependencies
 npm install
+composer install
 
 # Start development build with watch
 npm start
@@ -73,7 +185,49 @@ npm run lint
 
 # Format code
 npm run format
+
+# Individual linters
+npm run lint:js
+npm run lint:css
+npm run lint:php
 ```
+
+### File Structure
+
+```
+readease/
+├── text-resizer.php           # Plugin bootstrap
+├── package.json               # Node dependencies
+├── composer.json              # PHP dependencies
+├── src/
+│   ├── block/                 # Block source files
+│   │   ├── block.json         # Block metadata
+│   │   ├── index.js           # Block registration
+│   │   ├── edit.js            # Editor component
+│   │   ├── view.js            # Frontend script
+│   │   ├── render.php         # Server-side render
+│   │   └── editor.scss        # Editor styles
+│   ├── styles/                # Stylesheet partials
+│   │   ├── _variables.scss    # CSS custom properties
+│   │   ├── _base.scss         # Container and label
+│   │   ├── _buttons.scss      # Buttons control style
+│   │   ├── _slider.scss       # Slider control style
+│   │   ├── _dropdown.scss     # Dropdown control style
+│   │   ├── _icons.scss        # Icons control style
+│   │   └── _utilities.scss    # Reduced motion, a11y
+│   └── style.scss             # Main stylesheet entry
+├── build/                     # Compiled assets (gitignored)
+└── docs/                      # Additional documentation
+```
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile Safari (iOS)
+- Chrome Mobile (Android)
 
 ## License
 

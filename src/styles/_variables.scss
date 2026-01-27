@@ -1,0 +1,47 @@
+/**
+ * CSS Custom Properties (Theming API)
+ *
+ * Override these variables in your theme CSS to customize the block appearance.
+ *
+ * Example:
+ *   .wp-block-readease-text-resizer {
+ *     --text-resizer-border-radius: 8px;
+ *     --text-resizer-button-bg-hover: rgba(0, 0, 0, 0.1);
+ *   }
+ *
+ * @package Text_Resizer
+ */
+
+// Default scale value on :root (1 = no change to theme defaults)
+:root {
+	--text-resizer-scale: 1;
+}
+
+// Scaling styles are injected by JavaScript only when scale !== 1
+// This preserves theme defaults at scale 1 and applies multiplier when changed
+
+// Block-scoped custom properties
+.wp-block-readease-text-resizer {
+	// Layout
+	--text-resizer-gap: 0.75em;
+	--text-resizer-controls-gap: 0.25em;
+
+	// Colors
+	--text-resizer-button-bg: transparent;
+	--text-resizer-button-bg-hover: rgba(0, 0, 0, 0.05);
+	--text-resizer-button-bg-active: currentcolor;
+	--text-resizer-border-color: currentcolor;
+	--text-resizer-track-bg: rgba(0, 0, 0, 0.1);
+	--text-resizer-thumb-bg: #fff;
+
+	// Borders
+	--text-resizer-border-width: 1px;
+	--text-resizer-border-radius: 4px;
+
+	// Sizing
+	--text-resizer-min-height: 44px;
+	--text-resizer-slider-width: 120px;
+
+	// Transitions
+	--text-resizer-transition-duration: 0.15s;
+}

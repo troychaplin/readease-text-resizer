@@ -1,0 +1,98 @@
+/**
+ * Buttons Control Style
+ *
+ * Row of "A" buttons in increasing sizes.
+ *
+ * @package Text_Resizer
+ */
+
+.wp-block-readease-text-resizer__controls--buttons {
+	gap: 0;
+}
+
+// Button text (the "A" character) - defined first for proper cascade
+.wp-block-readease-text-resizer__button-text {
+	line-height: 1;
+}
+
+.wp-block-readease-text-resizer__button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: var(--text-resizer-min-height);
+	min-height: var(--text-resizer-min-height);
+	padding: 0.5em;
+	border: var(--text-resizer-border-width) solid var(--text-resizer-border-color);
+	border-radius: 0;
+	background: var(--text-resizer-button-bg);
+	color: inherit;
+	font-family: inherit;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color var(--text-resizer-transition-duration) ease, color var(--text-resizer-transition-duration) ease;
+
+	// Stack borders for adjacent buttons
+	&:not(:first-child) {
+		margin-inline-start: calc(var(--text-resizer-border-width) * -1);
+	}
+
+	// First button rounded on start
+	&:first-child {
+		border-start-start-radius: var(--text-resizer-border-radius);
+		border-end-start-radius: var(--text-resizer-border-radius);
+	}
+
+	// Last button rounded on end
+	&:last-child {
+		border-start-end-radius: var(--text-resizer-border-radius);
+		border-end-end-radius: var(--text-resizer-border-radius);
+	}
+
+	// Hover state
+	&:hover {
+		background-color: var(--text-resizer-button-bg-hover);
+	}
+
+	// Focus state
+	&:focus {
+		outline: 2px solid var(--text-resizer-border-color);
+		outline-offset: 2px;
+		position: relative;
+		z-index: 1;
+	}
+
+	// Active/pressed state
+	&--active {
+		background-color: var(--text-resizer-button-bg-active);
+
+		&:hover {
+			background-color: var(--text-resizer-button-bg-active);
+		}
+
+		.wp-block-readease-text-resizer__button-text {
+			// Invert text color when background is currentColor
+			filter: invert(1);
+		}
+	}
+
+	// Size variations for buttons - progressive sizing
+	&[data-index="0"] .wp-block-readease-text-resizer__button-text {
+		font-size: 0.75em;
+	}
+
+	&[data-index="1"] .wp-block-readease-text-resizer__button-text {
+		font-size: 1em;
+	}
+
+	&[data-index="2"] .wp-block-readease-text-resizer__button-text {
+		font-size: 1.25em;
+	}
+
+	&[data-index="3"] .wp-block-readease-text-resizer__button-text {
+		font-size: 1.5em;
+	}
+
+	&[data-index="4"] .wp-block-readease-text-resizer__button-text {
+		font-size: 1.75em;
+	}
+}

@@ -1,5 +1,5 @@
-=== Text Resizer ===
-Contributors:      areziaal
+=== ReadEase ===
+Contributors:      troychaplin
 Tags:              block, text, accessibility, resize, readability
 Tested up to:      6.7
 Stable tag:        1.0.0
@@ -12,61 +12,59 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 
 == Description ==
 
-Text Resizer provides a simple, native Gutenberg block for block themes that gives site visitors control over text size. Theme builders can add the block to any template (header, footer, sidebar) via the Site Editor.
+ReadEase provides a simple, native Gutenberg block named Text Resizer aimed for block theme builders that gives site visitors control over text size. Theme builders can add the block to any template (header, footer, sidebar) via the Site Editor.
+
+Built with accessibility in mind, this block helps your site meet WCAG 2.1 text resize guidelines while providing a seamless experience for visitors who need larger text.
+
+**PluginJam Hackathon Entry** - This plugin was developed as part of the [PluginJam](https://pluginjam.com/) hackathon, created by [Nik McLaughlin](https://developer.developer.developer.dev/), with the theme "Growth". ReadEase embodies growth in a literal, interactive way - visitors can grow the text on your site to meet their accessibility needs.
 
 = Features =
 
 * **Multiple control styles** - Choose from dropdown, buttons, slider, or minimal icons
 * **Customizable label** - Position on top, side, or hide completely with custom text
-* **Flexible scale settings** - Configure minimum/maximum scale and number of size steps
+* **Flexible scale settings** - Configure minimum/maximum scale (1.0x to 1.5x) and number of size steps (2-5)
 * **Scale scope options** - Apply scaling to full page or exclude template parts (header/footer)
 * **Custom CSS selector** - Target specific elements using advanced selector option
 * **Mobile-only mode** - Show controls only on mobile and tablet devices
-* **Persistent preferences** - Saves visitor choice via localStorage
-* **Smooth CSS transitions** - Animated scaling for better user experience
+* **Persistent preferences** - Saves visitor choice via localStorage across sessions
+* **Smooth CSS transitions** - Animated scaling with reduced motion support
 * **Fully accessible** - Keyboard navigable with proper ARIA labels
-* **Block theme support** - Native WordPress color and spacing controls
+* **Block theme support** - Native WordPress color, spacing, and alignment controls
+* **Theme customization** - CSS custom properties for easy style overrides
 
 = Control Styles =
 
-* **Dropdown** - Select menu showing percentage options (e.g., 100%, 120%, 150%)
+* **Dropdown** - Select menu showing percentage options (e.g., 100%, 125%, 150%)
 * **Buttons** - Row of "A" buttons in progressively larger sizes
-* **Slider** - Range input with small/large labels at each end
-* **Icons** - Minimal button group with minus, reset, and plus controls
+* **Slider** - Range input with small/large "A" labels at each end
+* **Icons** - Minimal button group with minus, reset (A), and plus controls
 
-= Block Settings =
+= For Theme Builders =
 
-**Display Settings:**
+ReadEase integrates seamlessly with block themes. The block respects your theme's color palette and typography, and provides CSS custom properties for advanced customization.
 
-* Control Style - Select the UI control type
-* Label Position - Top, side, or hidden
-* Label Text - Customize the label text (default: "Text Size")
-* Mobile Only - Only display controls on smaller screens
+**Customize the appearance in your theme CSS:**
 
-**Scale Settings:**
+`.wp-block-readease-text-resizer {`
+`  --text-resizer-border-radius: 8px;`
+`  --text-resizer-button-bg-hover: rgba(0, 0, 0, 0.1);`
+`}`
 
-* Scale Scope - Full page or exclude template parts
-* Size Steps - Number of size options (2-5)
-* Minimum Scale - Smallest text multiplier (1.0-1.2)
-* Maximum Scale - Largest text multiplier (1.1-1.5)
-
-**Advanced:**
-
-* Target Selector - Custom CSS selector for precise element targeting
+See the full list of CSS custom properties in the [GitHub documentation](https://github.com/troychaplin/readease).
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/text-resizer` or install via the WordPress plugins screen
+1. Upload the plugin files to `/wp-content/plugins/readease` or install via the WordPress plugins screen
 2. Activate the plugin through the 'Plugins' screen
 3. Open the Site Editor (Appearance > Editor)
-4. Add the Text Resizer block to any template part (header, footer, etc.)
+4. Add the "ReadEase: Text Resizer" block to any template part (header, footer, etc.)
 5. Configure the block settings in the sidebar panel
 
 == Frequently Asked Questions ==
 
 = Does this work with classic themes? =
 
-Text Resizer is designed for block themes that support the Site Editor. Classic themes are not supported.
+ReadEase is designed for block themes that support the Site Editor. Classic themes are not supported.
 
 = Where should I place the block? =
 
@@ -74,11 +72,23 @@ The block works best in persistent template parts like the header or footer, so 
 
 = How does the preference saving work? =
 
-When a visitor selects a text size, their preference is saved to localStorage and automatically applied on future visits.
+When a visitor selects a text size, their preference is saved to localStorage and automatically applied on future visits. The preference syncs across browser tabs.
 
 = Can I target specific content areas? =
 
-Yes, use the "Exclude Template Parts" scope option to only scale main content, or use a custom CSS selector in the Advanced settings.
+Yes! Use the "Exclude Template Parts" scope option to only scale main content (excludes header/footer), or use a custom CSS selector in the Advanced settings for precise control.
+
+= How do I customize the block's appearance? =
+
+The block supports WordPress color and spacing controls in the editor. For advanced customization, override the CSS custom properties in your theme's stylesheet.
+
+= Does this affect browser zoom? =
+
+No, ReadEase complements browser zoom - it doesn't replace it. The block uses CSS transforms to scale text independently of browser zoom settings.
+
+= What about users with reduced motion preferences? =
+
+ReadEase respects the `prefers-reduced-motion` media query. Transitions are disabled for users who have this preference enabled.
 
 == Screenshots ==
 
@@ -86,15 +96,23 @@ Yes, use the "Exclude Template Parts" scope option to only scale main content, o
 2. Block settings panel showing display and scale options
 3. Frontend view with buttons control style
 4. Frontend view with slider control style
+5. Icons control style - minimal button group
 
 == Changelog ==
 
-= 0.1.0 =
+= 1.0.0 =
 * Initial release
 * Four control styles: dropdown, buttons, slider, icons
-* Configurable label position and text
+* Configurable label position (top, side, hidden) and custom text
 * Scale scope with full page or exclude template parts option
-* Custom CSS selector support
+* Custom CSS selector support for advanced targeting
 * Mobile-only display option
-* localStorage preference persistence
-* Full accessibility support with ARIA labels
+* localStorage preference persistence with cross-tab sync
+* Full accessibility support with ARIA labels and keyboard navigation
+* CSS custom properties for theme customization
+* Reduced motion support
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+Initial release of ReadEase: Text Resizer.

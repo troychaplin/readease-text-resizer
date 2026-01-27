@@ -1,0 +1,73 @@
+/**
+ * Icons Control Style
+ *
+ * Minimal +/A/- button group.
+ *
+ * @package Text_Resizer
+ */
+
+.wp-block-readease-text-resizer__controls--icons {
+	gap: var(--text-resizer-controls-gap);
+}
+
+// Icon button text (the "A" for reset) - defined first for proper cascade
+.wp-block-readease-text-resizer__icon-text {
+	font-weight: 600;
+	font-size: 1.125em;
+	line-height: 1;
+}
+
+.wp-block-readease-text-resizer__icon-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--text-resizer-min-height);
+	height: var(--text-resizer-min-height);
+	padding: 0;
+	border: var(--text-resizer-border-width) solid var(--text-resizer-border-color);
+	border-radius: var(--text-resizer-border-radius);
+	background: var(--text-resizer-button-bg);
+	color: inherit;
+	cursor: pointer;
+	transition: background-color var(--text-resizer-transition-duration) ease, opacity var(--text-resizer-transition-duration) ease;
+
+	// SVG icon styling
+	svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	// Focus state
+	&:focus {
+		outline: 2px solid var(--text-resizer-border-color);
+		outline-offset: 2px;
+	}
+
+	// Disabled state
+	&:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+
+	// Hover state (must come after focus and disabled)
+	&:hover:not(:disabled) {
+		background-color: var(--text-resizer-button-bg-hover);
+	}
+
+	// Active/pressed state (reset button)
+	&--active {
+		background-color: var(--text-resizer-button-bg-active);
+
+		svg {
+			filter: invert(1);
+		}
+
+		.wp-block-readease-text-resizer__icon-text {
+			filter: invert(1);
+		}
+
+		&:hover:not(:disabled) {
+			background-color: var(--text-resizer-button-bg-active);
+		}
+	}
+}
