@@ -16,8 +16,6 @@ ReadEase provides a simple, native Gutenberg block named Text Resizer aimed for 
 
 Built with accessibility in mind, this block helps your site meet WCAG 2.1 text resize guidelines while providing a seamless experience for visitors who need larger text.
 
-**PluginJam Hackathon Entry** - This plugin was developed as part of the [PluginJam](https://pluginjam.com/) hackathon, created by [Nik McLaughlin](https://developer.developer.developer.dev/), with the theme "Growth". ReadEase embodies growth in a literal, interactive way - visitors can grow the text on your site to meet their accessibility needs.
-
 = Features =
 
 * **Multiple control styles** - Choose from dropdown, buttons, slider, or minimal icons
