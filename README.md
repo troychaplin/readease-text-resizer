@@ -73,7 +73,7 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 |---------|-------------|
 | Target Selector | Custom CSS selector for precise element targeting |
 
-<img src="assets/github-control-options.jpg" alt="An animated GIF providing a demo of the functionality provided by the block" style="width: 100%; height: auto;">
+<img src="assets/configuration.png" alt="An animated GIF providing a demo of the functionality provided by the block" style="width: 100%; height: auto;">
 
 ### Block Supports
 
