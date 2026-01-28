@@ -171,12 +171,8 @@ if ( 'hidden' === $label_position ) {
 					<?php
 					$is_default = ( $index === $default_index );
 					$percentage = round( $scale * 100 );
-					if ( $is_default ) {
-						$option_label = __( 'Default', 'text-resizer' );
-					} else {
-						/* translators: %d: percentage value */
-						$option_label = sprintf( __( '%d%%', 'text-resizer' ), $percentage );
-					}
+					/* translators: %d: percentage value */
+					$option_label = sprintf( __( '%d%%', 'text-resizer' ), $percentage );
 					?>
 					<option
 						value="<?php echo esc_attr( $scale ); ?>"

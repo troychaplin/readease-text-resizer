@@ -73,6 +73,8 @@ A Gutenberg block that lets site visitors resize text for improved readability a
 |---------|-------------|
 | Target Selector | Custom CSS selector for precise element targeting |
 
+<img src="assets/github-control-options.jpg" alt="An animated GIF providing a demo of the functionality provided by the block" style="width: 100%; height: auto;">
+
 ### Block Supports
 
 The block includes native WordPress support for:
@@ -92,24 +94,30 @@ Add these to your theme's stylesheet to customize the block appearance:
 ```css
 .wp-block-readease-text-resizer {
   /* Layout */
-  --text-resizer-gap: 0.75em;              /* Space between label and controls */
+  --text-resizer-gap: 0.5em;               /* Space between label and controls */
   --text-resizer-controls-gap: 0.25em;     /* Space between control buttons */
 
   /* Colors */
   --text-resizer-button-bg: transparent;           /* Button background */
   --text-resizer-button-bg-hover: rgba(0, 0, 0, 0.05);  /* Hover state */
-  --text-resizer-button-bg-active: currentcolor;   /* Active/selected state */
-  --text-resizer-border-color: currentcolor;       /* Border and focus outline */
-  --text-resizer-track-bg: rgba(0, 0, 0, 0.1);     /* Slider track background */
-  --text-resizer-thumb-bg: #fff;                   /* Slider thumb background */
+  --text-resizer-button-bg-active: rgba(0, 0, 0, 0.075); /* Active/selected state */
+  --text-resizer-border-color: rgba(0, 0, 0, 1);   /* Border color */
+  --text-resizer-focus-color: rgba(0, 0, 0, 0.5);  /* Focus outline color */
+  --text-resizer-track-bg: #fff;                   /* Slider track background */
+  --text-resizer-track-border: #c6c6c6;            /* Slider track border */
+  --text-resizer-thumb-bg: #ECECEC;                /* Slider thumb background */
+  --text-resizer-thumb-border-color: #757575;      /* Slider thumb border color */
+  --text-resizer-thumb-border-width: 1px;          /* Slider thumb border width */
 
   /* Borders */
   --text-resizer-border-width: 1px;        /* Border thickness */
-  --text-resizer-border-radius: 4px;       /* Corner rounding */
+  --text-resizer-border-radius: 3px;       /* Corner rounding */
 
   /* Sizing */
-  --text-resizer-min-height: 44px;         /* Minimum touch target size */
-  --text-resizer-slider-width: 120px;      /* Slider width */
+  --text-resizer-min-height: 36px;         /* Minimum touch target size */
+  --text-resizer-slider-width: 80px;       /* Slider width */
+  --text-resizer-slider-height: 4px;       /* Slider track height */
+  --text-resizer-thumb-size: 16px;         /* Slider thumb diameter */
 
   /* Transitions */
   --text-resizer-transition-duration: 0.15s;  /* Animation speed */

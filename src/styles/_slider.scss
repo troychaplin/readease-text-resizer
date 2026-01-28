@@ -12,27 +12,28 @@
 
 .wp-block-readease-text-resizer__slider {
 	width: var(--text-resizer-slider-width);
-	height: 8px;
+	height: var(--text-resizer-slider-height);
 	margin: 0;
 	padding: 0;
 	border-radius: var(--text-resizer-border-radius);
 	background: var(--text-resizer-track-bg);
 	appearance: none;
 	cursor: pointer;
+	border: 1px solid var(--text-resizer-track-border);
 
 	// Webkit track
 	&::-webkit-slider-runnable-track {
-		height: 8px;
+		height: var(--text-resizer-slider-height);
 		border-radius: var(--text-resizer-border-radius);
 		background: var(--text-resizer-track-bg);
 	}
 
 	// Webkit thumb
 	&::-webkit-slider-thumb {
-		width: 20px;
-		height: 20px;
-		margin-top: -6px;
-		border: 2px solid var(--text-resizer-border-color);
+		width: var(--text-resizer-thumb-size);
+		height: var(--text-resizer-thumb-size);
+		margin-top: calc((var(--text-resizer-slider-height) - var(--text-resizer-thumb-size)) / 2);
+		border: var(--text-resizer-thumb-border-width) solid var(--text-resizer-thumb-border-color);
 		border-radius: 50%;
 		background: var(--text-resizer-thumb-bg);
 		appearance: none;
@@ -42,16 +43,16 @@
 
 	// Firefox track
 	&::-moz-range-track {
-		height: 8px;
+		height: var(--text-resizer-slider-height);
 		border-radius: var(--text-resizer-border-radius);
 		background: var(--text-resizer-track-bg);
 	}
 
 	// Firefox thumb
 	&::-moz-range-thumb {
-		width: 20px;
-		height: 20px;
-		border: 2px solid var(--text-resizer-border-color);
+		width: var(--text-resizer-thumb-size);
+		height: var(--text-resizer-thumb-size);
+		border: var(--text-resizer-thumb-border-width) solid var(--text-resizer-thumb-border-color);
 		border-radius: 50%;
 		background: var(--text-resizer-thumb-bg);
 		cursor: pointer;
@@ -64,12 +65,12 @@
 	}
 
 	&:focus::-webkit-slider-thumb {
-		outline: 2px solid var(--text-resizer-border-color);
+		outline: 2px solid var(--text-resizer-focus-color);
 		outline-offset: 2px;
 	}
 
 	&:focus::-moz-range-thumb {
-		outline: 2px solid var(--text-resizer-border-color);
+		outline: 2px solid var(--text-resizer-focus-color);
 		outline-offset: 2px;
 	}
 

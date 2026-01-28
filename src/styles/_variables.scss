@@ -23,24 +23,30 @@
 // Block-scoped custom properties
 .wp-block-readease-text-resizer {
 	// Layout
-	--text-resizer-gap: 0.75em;
+	--text-resizer-gap: 0.5em;
 	--text-resizer-controls-gap: 0.25em;
 
 	// Colors
 	--text-resizer-button-bg: transparent;
 	--text-resizer-button-bg-hover: rgba(0, 0, 0, 0.05);
-	--text-resizer-button-bg-active: currentcolor;
-	--text-resizer-border-color: currentcolor;
-	--text-resizer-track-bg: rgba(0, 0, 0, 0.1);
-	--text-resizer-thumb-bg: #fff;
+	--text-resizer-button-bg-active: rgba(0, 0, 0, 0.075);
+	--text-resizer-border-color: rgba(0, 0, 0, 1);
+	--text-resizer-focus-color: rgba(0, 0, 0, 0.5);
+	--text-resizer-track-bg: #fff;
+	--text-resizer-track-border: #c6c6c6;
+	--text-resizer-thumb-bg: #ECECEC;
+	--text-resizer-thumb-border-color: #757575;
+	--text-resizer-thumb-border-width: 1px;
 
 	// Borders
 	--text-resizer-border-width: 1px;
-	--text-resizer-border-radius: 4px;
+	--text-resizer-border-radius: 3px;
 
 	// Sizing
-	--text-resizer-min-height: 44px;
-	--text-resizer-slider-width: 120px;
+	--text-resizer-min-height: 36px;
+	--text-resizer-slider-width: 80px;
+	--text-resizer-slider-height: 4px;
+	--text-resizer-thumb-size: 16px;
 
 	// Transitions
 	--text-resizer-transition-duration: 0.15s;

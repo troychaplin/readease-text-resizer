@@ -12,8 +12,8 @@
 
 // Icon button text (the "A" for reset) - defined first for proper cascade
 .wp-block-readease-text-resizer__icon-text {
-	font-weight: 600;
-	font-size: 1.125em;
+	font-weight: 400;
+	font-size: 1em;
 	line-height: 1;
 }
 
@@ -33,13 +33,13 @@
 
 	// SVG icon styling
 	svg {
-		width: 24px;
-		height: 24px;
+		width: 18px;
+		height: 18px;
 	}
 
 	// Focus state
 	&:focus {
-		outline: 2px solid var(--text-resizer-border-color);
+		outline: 2px solid var(--text-resizer-focus-color);
 		outline-offset: 2px;
 	}
 
@@ -59,10 +59,6 @@
 		background-color: var(--text-resizer-button-bg-active);
 
 		svg {
-			filter: invert(1);
-		}
-
-		.wp-block-readease-text-resizer__icon-text {
 			filter: invert(1);
 		}
 

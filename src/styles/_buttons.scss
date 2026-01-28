@@ -10,18 +10,13 @@
 	gap: 0;
 }
 
-// Button text (the "A" character) - defined first for proper cascade
-.wp-block-readease-text-resizer__button-text {
-	line-height: 1;
-}
-
 .wp-block-readease-text-resizer__button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	min-width: var(--text-resizer-min-height);
 	min-height: var(--text-resizer-min-height);
-	padding: 0.5em;
+	padding: 0.25em;
 	border: var(--text-resizer-border-width) solid var(--text-resizer-border-color);
 	border-radius: 0;
 	background: var(--text-resizer-button-bg);
@@ -55,7 +50,7 @@
 
 	// Focus state
 	&:focus {
-		outline: 2px solid var(--text-resizer-border-color);
+		outline: 2px solid var(--text-resizer-focus-color);
 		outline-offset: 2px;
 		position: relative;
 		z-index: 1;
@@ -67,11 +62,6 @@
 
 		&:hover {
 			background-color: var(--text-resizer-button-bg-active);
-		}
-
-		.wp-block-readease-text-resizer__button-text {
-			// Invert text color when background is currentColor
-			filter: invert(1);
 		}
 	}
 
