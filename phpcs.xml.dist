@@ -39,7 +39,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="text-resizer"/>
+				<element value="readease"/>
 			</property>
 		</properties>
 	</rule>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Text Resizer
+ * Plugin Name:       ReadEase: Text Resizer
  * Description:       A Gutenberg block that lets site visitors resize text for improved readability and accessibility.
  * Version:           1.0.0
  * Requires at least: 6.7
@@ -9,7 +9,7 @@
  * Author URI:        https://troychaplin.ca/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       text-resizer
+ * Text Domain:       readease
  *
  * @package Text_Resizer
  */
