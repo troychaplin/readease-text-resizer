@@ -47,15 +47,15 @@ function ButtonsPreview({ sizeSteps, minScale, maxScale }) {
 		<div
 			className="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--buttons"
 			role="group"
-			aria-label={__('Text size controls', 'text-resizer')}
+			aria-label={__('Text size controls', 'readease-text-resizer')}
 		>
 			{scales.map((scale, index) => {
 				const isActive = index === defaultIndex;
-				let label = __('Reset text size', 'text-resizer');
+				let label = __('Reset text size', 'readease-text-resizer');
 				if (index === 0) {
-					label = __('Decrease text size', 'text-resizer');
+					label = __('Decrease text size', 'readease-text-resizer');
 				} else if (index === scales.length - 1) {
-					label = __('Increase text size', 'text-resizer');
+					label = __('Increase text size', 'readease-text-resizer');
 				}
 
 				return (
@@ -105,7 +105,7 @@ function SliderPreview({ sizeSteps, minScale, maxScale }) {
 				max={maxScale}
 				step={step}
 				defaultValue="1"
-				aria-label={__('Text size', 'text-resizer')}
+				aria-label={__('Text size', 'readease-text-resizer')}
 			/>
 			<span className="wp-block-readease-text-resizer__slider-label wp-block-readease-text-resizer__slider-label--max">
 				A
@@ -140,14 +140,14 @@ function DropdownPreview({ sizeSteps, minScale, maxScale }) {
 		<div className="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--dropdown">
 			<select
 				className="wp-block-readease-text-resizer__select"
-				aria-label={__('Text size', 'text-resizer')}
+				aria-label={__('Text size', 'readease-text-resizer')}
 				defaultValue={scales[defaultIndex]}
 			>
 				{scales.map((scale, index) => {
 					const isDefault = index === defaultIndex;
 					const percentage = Math.round(scale * 100);
 					const label = isDefault
-						? __('Default', 'text-resizer')
+						? __('Default', 'readease-text-resizer')
 						: `${percentage}%`;
 
 					return (
@@ -171,12 +171,12 @@ function IconsPreview() {
 		<div
 			className="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--icons"
 			role="group"
-			aria-label={__('Text size controls', 'text-resizer')}
+			aria-label={__('Text size controls', 'readease-text-resizer')}
 		>
 			<button
 				type="button"
 				className="wp-block-readease-text-resizer__icon-button"
-				aria-label={__('Decrease text size', 'text-resizer')}
+				aria-label={__('Decrease text size', 'readease-text-resizer')}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@ function IconsPreview() {
 			<button
 				type="button"
 				className="wp-block-readease-text-resizer__icon-button wp-block-readease-text-resizer__icon-button--active"
-				aria-label={__('Reset text size', 'text-resizer')}
+				aria-label={__('Reset text size', 'readease-text-resizer')}
 				aria-pressed="true"
 			>
 				<span className="wp-block-readease-text-resizer__icon-text">
@@ -202,7 +202,7 @@ function IconsPreview() {
 			<button
 				type="button"
 				className="wp-block-readease-text-resizer__icon-button"
-				aria-label={__('Increase text size', 'text-resizer')}
+				aria-label={__('Increase text size', 'readease-text-resizer')}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -256,27 +256,33 @@ export default function Edit({ attributes, setAttributes }) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={__('Display Settings', 'text-resizer')}
+					title={__('Display Settings', 'readease-text-resizer')}
 					initialOpen={true}
 				>
 					<SelectControl
-						label={__('Control Style', 'text-resizer')}
+						label={__('Control Style', 'readease-text-resizer')}
 						value={controlStyle}
 						options={[
 							{
-								label: __('Dropdown', 'text-resizer'),
+								label: __('Dropdown', 'readease-text-resizer'),
 								value: 'dropdown',
 							},
 							{
-								label: __('Buttons (A- A A+)', 'text-resizer'),
+								label: __(
+									'Buttons (A- A A+)',
+									'readease-text-resizer'
+								),
 								value: 'buttons',
 							},
 							{
-								label: __('Slider', 'text-resizer'),
+								label: __('Slider', 'readease-text-resizer'),
 								value: 'slider',
 							},
 							{
-								label: __('Icons (Minimal)', 'text-resizer'),
+								label: __(
+									'Icons (Minimal)',
+									'readease-text-resizer'
+								),
 								value: 'icons',
 							},
 						]}
@@ -285,19 +291,19 @@ export default function Edit({ attributes, setAttributes }) {
 						}
 					/>
 					<SelectControl
-						label={__('Label Position', 'text-resizer')}
+						label={__('Label Position', 'readease-text-resizer')}
 						value={labelPosition}
 						options={[
 							{
-								label: __('Side', 'text-resizer'),
+								label: __('Side', 'readease-text-resizer'),
 								value: 'side',
 							},
 							{
-								label: __('Top', 'text-resizer'),
+								label: __('Top', 'readease-text-resizer'),
 								value: 'top',
 							},
 							{
-								label: __('Hidden', 'text-resizer'),
+								label: __('Hidden', 'readease-text-resizer'),
 								value: 'hidden',
 							},
 						]}
@@ -306,17 +312,17 @@ export default function Edit({ attributes, setAttributes }) {
 						}
 					/>
 					<TextControl
-						label={__('Label Text', 'text-resizer')}
+						label={__('Label Text', 'readease-text-resizer')}
 						value={labelText}
 						onChange={(value) =>
 							setAttributes({ labelText: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Mobile Only', 'text-resizer')}
+						label={__('Mobile Only', 'readease-text-resizer')}
 						help={__(
 							'Only show controls on mobile and tablet devices.',
-							'text-resizer'
+							'readease-text-resizer'
 						)}
 						checked={mobileOnly}
 						onChange={(value) =>
@@ -325,25 +331,25 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={__('Scale Settings', 'text-resizer')}
+					title={__('Scale Settings', 'readease-text-resizer')}
 					initialOpen={true}
 				>
 					<SelectControl
-						label={__('Scale Scope', 'text-resizer')}
+						label={__('Scale Scope', 'readease-text-resizer')}
 						help={__(
 							'Choose which parts of the page to resize.',
-							'text-resizer'
+							'readease-text-resizer'
 						)}
 						value={scaleScope}
 						options={[
 							{
-								label: __('Full Page', 'text-resizer'),
+								label: __('Full Page', 'readease-text-resizer'),
 								value: 'full-page',
 							},
 							{
 								label: __(
 									'Exclude Template Parts',
-									'text-resizer'
+									'readease-text-resizer'
 								),
 								value: 'exclude-template',
 							},
@@ -353,10 +359,10 @@ export default function Edit({ attributes, setAttributes }) {
 						}
 					/>
 					<RangeControl
-						label={__('Size Steps', 'text-resizer')}
+						label={__('Size Steps', 'readease-text-resizer')}
 						help={__(
 							'Number of size options to offer visitors.',
-							'text-resizer'
+							'readease-text-resizer'
 						)}
 						value={sizeSteps}
 						onChange={(value) =>
@@ -366,10 +372,10 @@ export default function Edit({ attributes, setAttributes }) {
 						max={5}
 					/>
 					<RangeControl
-						label={__('Minimum Scale', 'text-resizer')}
+						label={__('Minimum Scale', 'readease-text-resizer')}
 						help={__(
 							'Smallest text size multiplier. 1 = theme default.',
-							'text-resizer'
+							'readease-text-resizer'
 						)}
 						value={minScale}
 						onChange={(value) => setAttributes({ minScale: value })}
@@ -378,10 +384,10 @@ export default function Edit({ attributes, setAttributes }) {
 						step={0.05}
 					/>
 					<RangeControl
-						label={__('Maximum Scale', 'text-resizer')}
+						label={__('Maximum Scale', 'readease-text-resizer')}
 						help={__(
 							'Largest text size multiplier (e.g., 1.2 = 120%).',
-							'text-resizer'
+							'readease-text-resizer'
 						)}
 						value={maxScale}
 						onChange={(value) => setAttributes({ maxScale: value })}
@@ -393,10 +399,10 @@ export default function Edit({ attributes, setAttributes }) {
 			</InspectorControls>
 			<InspectorAdvancedControls>
 				<TextControl
-					label={__('Target Selector', 'text-resizer')}
+					label={__('Target Selector', 'readease-text-resizer')}
 					help={__(
 						'Custom CSS selector to override the scale scope.',
-						'text-resizer'
+						'readease-text-resizer'
 					)}
 					value={targetSelector}
 					onChange={(value) =>

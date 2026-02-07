@@ -25,7 +25,7 @@ $text_resizer_scale_scope     = isset( $attributes['scaleScope'] ) ? $attributes
 $text_resizer_target_selector = isset( $attributes['targetSelector'] ) ? $attributes['targetSelector'] : '';
 $text_resizer_control_style   = isset( $attributes['controlStyle'] ) ? $attributes['controlStyle'] : 'dropdown';
 $text_resizer_label_position  = isset( $attributes['labelPosition'] ) ? $attributes['labelPosition'] : 'side';
-$text_resizer_label_text      = isset( $attributes['labelText'] ) ? $attributes['labelText'] : __( 'Text Size', 'readease' );
+$text_resizer_label_text      = isset( $attributes['labelText'] ) ? $attributes['labelText'] : __( 'Text Size', 'readease-text-resizer' );
 
 // Calculate scale values.
 $text_resizer_scales = array();
@@ -81,10 +81,10 @@ if ( 'hidden' === $text_resizer_label_position ) {
 	</span>
 
 	<?php if ( 'buttons' === $text_resizer_control_style ) : ?>
-		<div class="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--buttons" role="group" aria-label="<?php esc_attr_e( 'Text size controls', 'readease' ); ?>">
+		<div class="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--buttons" role="group" aria-label="<?php esc_attr_e( 'Text size controls', 'readease-text-resizer' ); ?>">
 			<?php foreach ( $text_resizer_scales as $text_resizer_index => $text_resizer_scale ) : ?>
 				<?php
-				$text_resizer_is_active = ( $text_resizer_index === $text_resizer_default_index );
+				$text_resizer_is_active    = ( $text_resizer_index === $text_resizer_default_index );
 				$text_resizer_button_class = 'wp-block-readease-text-resizer__button';
 				if ( $text_resizer_is_active ) {
 					$text_resizer_button_class .= ' wp-block-readease-text-resizer__button--active';
@@ -92,11 +92,11 @@ if ( 'hidden' === $text_resizer_label_position ) {
 
 				// Determine button label.
 				if ( 0 === $text_resizer_index ) {
-					$text_resizer_aria_label = __( 'Decrease text size', 'readease' );
+					$text_resizer_aria_label = __( 'Decrease text size', 'readease-text-resizer' );
 				} elseif ( count( $text_resizer_scales ) - 1 === $text_resizer_index ) {
-					$text_resizer_aria_label = __( 'Increase text size', 'readease' );
+					$text_resizer_aria_label = __( 'Increase text size', 'readease-text-resizer' );
 				} else {
-					$text_resizer_aria_label = __( 'Reset text size', 'readease' );
+					$text_resizer_aria_label = __( 'Reset text size', 'readease-text-resizer' );
 				}
 				?>
 				<button
@@ -127,18 +127,18 @@ if ( 'hidden' === $text_resizer_label_position ) {
 				max="<?php echo esc_attr( $text_resizer_max_scale ); ?>"
 				step="<?php echo esc_attr( $text_resizer_slider_step ); ?>"
 				value="1"
-				aria-label="<?php esc_attr_e( 'Text size', 'readease' ); ?>"
+				aria-label="<?php esc_attr_e( 'Text size', 'readease-text-resizer' ); ?>"
 			/>
 			<span class="wp-block-readease-text-resizer__slider-label wp-block-readease-text-resizer__slider-label--max">A</span>
 		</div>
 
 	<?php elseif ( 'icons' === $text_resizer_control_style ) : ?>
-		<div class="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--icons" role="group" aria-label="<?php esc_attr_e( 'Text size controls', 'readease' ); ?>">
+		<div class="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--icons" role="group" aria-label="<?php esc_attr_e( 'Text size controls', 'readease-text-resizer' ); ?>">
 			<button
 				type="button"
 				class="wp-block-readease-text-resizer__icon-button"
 				data-action="decrease"
-				aria-label="<?php esc_attr_e( 'Decrease text size', 'readease' ); ?>"
+				aria-label="<?php esc_attr_e( 'Decrease text size', 'readease-text-resizer' ); ?>"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
 					<path d="M7 11.5h10V13H7z" fill="currentColor"/>
@@ -148,7 +148,7 @@ if ( 'hidden' === $text_resizer_label_position ) {
 				type="button"
 				class="wp-block-readease-text-resizer__icon-button wp-block-readease-text-resizer__icon-button--active"
 				data-action="reset"
-				aria-label="<?php esc_attr_e( 'Reset text size', 'readease' ); ?>"
+				aria-label="<?php esc_attr_e( 'Reset text size', 'readease-text-resizer' ); ?>"
 				aria-pressed="true"
 			>
 				<span class="wp-block-readease-text-resizer__icon-text">A</span>
@@ -157,7 +157,7 @@ if ( 'hidden' === $text_resizer_label_position ) {
 				type="button"
 				class="wp-block-readease-text-resizer__icon-button"
 				data-action="increase"
-				aria-label="<?php esc_attr_e( 'Increase text size', 'readease' ); ?>"
+				aria-label="<?php esc_attr_e( 'Increase text size', 'readease-text-resizer' ); ?>"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
 					<path d="M11 12.5V17.5H12.5V12.5H17.5V11H12.5V6H11V11H6V12.5H11Z" fill="currentColor"/>
@@ -169,14 +169,14 @@ if ( 'hidden' === $text_resizer_label_position ) {
 		<div class="wp-block-readease-text-resizer__controls wp-block-readease-text-resizer__controls--dropdown">
 			<select
 				class="wp-block-readease-text-resizer__select"
-				aria-label="<?php esc_attr_e( 'Text size', 'readease' ); ?>"
+				aria-label="<?php esc_attr_e( 'Text size', 'readease-text-resizer' ); ?>"
 			>
 				<?php foreach ( $text_resizer_scales as $text_resizer_index => $text_resizer_scale ) : ?>
 					<?php
 					$text_resizer_is_default = ( $text_resizer_index === $text_resizer_default_index );
 					$text_resizer_percentage = round( $text_resizer_scale * 100 );
 					/* translators: %d: percentage value */
-					$text_resizer_option_label = sprintf( __( '%d%%', 'readease' ), $text_resizer_percentage );
+					$text_resizer_option_label = sprintf( __( '%d%%', 'readease-text-resizer' ), $text_resizer_percentage );
 					?>
 					<option
 						value="<?php echo esc_attr( $text_resizer_scale ); ?>"

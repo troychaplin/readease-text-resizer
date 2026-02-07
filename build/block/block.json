@@ -90,9 +90,20 @@
       "__experimentalDefaultControls": {
         "padding": true
       }
+    },
+    "__experimentalBorder": {
+      "__experimentalSkipSerialization": true,
+      "color": true,
+      "radius": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "width": true
+      }
     }
   },
-  "textdomain": "text-resizer",
+  "textdomain": "readease-text-resizer",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",

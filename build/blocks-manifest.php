@@ -95,9 +95,20 @@ return array(
 				'__experimentalDefaultControls' => array(
 					'padding' => true
 				)
+			),
+			'__experimentalBorder' => array(
+				'__experimentalSkipSerialization' => true,
+				'color' => true,
+				'radius' => true,
+				'width' => true,
+				'__experimentalDefaultControls' => array(
+					'color' => true,
+					'radius' => true,
+					'width' => true
+				)
 			)
 		),
-		'textdomain' => 'text-resizer',
+		'textdomain' => 'readease-text-resizer',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
