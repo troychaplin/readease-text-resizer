@@ -1,5 +1,5 @@
 === ReadEase: Text Resizer ===
-Contributors:      troychaplin
+Contributors:      areziaal
 Tags:              block, text, accessibility, resize, readability
 Tested up to:      6.9
 Stable tag:        1.0.0
